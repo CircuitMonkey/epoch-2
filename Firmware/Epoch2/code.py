@@ -19,21 +19,23 @@ from adafruit_display_text.label import Label
 from gui.ManualPage import ManualPage
 from gui.ModeSelectPage import ModeSelectPage
 from gui.ConfigurePage import ConfigurePage
+from gui.ChannelSettingsPage import ChannelSettingsPage
+from gui.FavesPage import *
 import framebuffer
 import state
 
 # import supervisor
 # supervisor.runtime.autoreload = False
 
-def switchPage( st, img, img_palette, font ):
+def switchPage( st, img, img_palette, fontS, fontL ):
     print (f"Switch to Mode: {st.mode}")
     # see state.modes for list of possible modes
     if ( st.mode == 0 ): # Configure
-        pg = ConfigurePage(img, img_palette, font)
+        pg = ConfigurePage(img, img_palette, fontL)
     elif ( st.mode == 1 ):
         pg = ModeSelectPage(img, img_palette)
     elif ( st.mode == 2 ):
-        pg = ManualPage(img, img_palette, font)
+        pg = ManualPage(img, img_palette, fontS)
     # elif ( st.mode == 3 ):
     #     page = CycleMode(img, img_palette)
     # elif ( st.mode == 4 ):
@@ -42,8 +44,14 @@ def switchPage( st, img, img_palette, font ):
     #     page = PlungeMode(img, img_palette)
     # elif ( st.mode == 5 ):
     #    page = PullMode(img, img_palette)
+    elif ( st.mode == 20 ):
+        pg = ChannelSettingsPage(img, img_palette, fontS)
+    elif ( st.mode == 30 ):
+        pg = Save2FavesPage(img, img_palette, fontS)
+    elif ( st.mode == 31 ):
+        pg = LoadFromFavesPage(img, img_palette, fontS)
     else: # 99 Error Page?
-        pg = ConfigurePage(img, img_palette, font)
+        pg = ConfigurePage(img, img_palette, fontL)
 
 
     # Note: You should call display.refresh() after calling this.
@@ -136,8 +144,9 @@ while True:
                     # which is the actual number for the mode to switch to
                     state.mode = state.modes[state.mode][tStat-2]
                     group.remove(page)
+                    display.refresh()
                     upper_label.text = state.title[state.mode]
-                    page = switchPage( state, glyphs_img, glyphs_palette, sm_font )
+                    page = switchPage( state, glyphs_img, glyphs_palette, sm_font, font )
                     group.append(page)
                 display.refresh()
                 drag = 1
