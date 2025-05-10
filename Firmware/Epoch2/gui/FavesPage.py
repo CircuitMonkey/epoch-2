@@ -24,8 +24,9 @@ class LoadFromFavesPage(Page):
         return 0
 
 class Save2FavesPage(Page):
-    def __init__(self, glyphs_img, glyphs_palette, font):
+    def __init__(self, state, glyphs_img, glyphs_palette, font):
         super().__init__()
+        self.state = state
         self.x = 0
         self.backButton = ImageButton(416,0,1,6, glyphs_img, glyphs_palette)
 

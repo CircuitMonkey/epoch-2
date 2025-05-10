@@ -7,21 +7,27 @@ class ConfigurePage(Page):
     def __init__(self, state, glyphs_img, glyphs_palette, font):
         super().__init__()
 
-        self.conf1 = Configurator( 64, 64, 1, state, glyphs_img, glyphs_palette, 28, font )
-        self.conf2 = Configurator( 128, 64, 2, state, glyphs_img, glyphs_palette, 29, font )
-        self.conf3 = Configurator( 192, 64, 3, state, glyphs_img, glyphs_palette, 30, font )
-        self.conf4 = Configurator( 256, 64, 4, state, glyphs_img, glyphs_palette, 31, font )
-        self.conf5 = Configurator( 400, 64, 0, state, glyphs_img, glyphs_palette, 33, font )
+        self.configurators = [
+            Configurator( 400, 64, 0, state, glyphs_img, glyphs_palette, 33, font ),
+            Configurator( 64, 64, 1, state, glyphs_img, glyphs_palette, 28, font ),
+            Configurator( 128, 64, 2, state, glyphs_img, glyphs_palette, 29, font ),
+            Configurator( 192, 64, 3, state, glyphs_img, glyphs_palette, 30, font ),
+            Configurator( 256, 64, 4, state, glyphs_img, glyphs_palette, 31, font )
+            # TODO: Four more for ch 5-8
+        ]
+
+        for i, e in enumerate(self.configurators):
+            self.append(e)
 
         self.savFavButton = ImageButton(0, 400, 2, 12, glyphs_img, glyphs_palette)
         self.okButton = TextButton(196, 400, 2, "OK", glyphs_img, glyphs_palette, font)
         self.favButton = ImageButton(400, 400, 1, 13, glyphs_img, glyphs_palette)
 
-        self.append(self.conf1)
-        self.append(self.conf2)
-        self.append(self.conf3)
-        self.append(self.conf4)
-        self.append(self.conf5)
+        # self.append(self.conf1)
+        # self.append(self.conf2)
+        # self.append(self.conf3)
+        # self.append(self.conf4)
+        # self.append(self.conf5)
         self.append(self.savFavButton)
         self.append(self.okButton)
         self.append(self.favButton)
@@ -53,25 +59,25 @@ class ConfigurePage(Page):
                 print("Select Faves Pressed")
                 return 2 + 2 # Handled and now its a drag.
 
-        if self.conf1.handleTouch( touch, drag ) > 1:
+        if self.configurators[1].handleTouch( touch, drag ) > 1:
             # handle settings request ch. 1
             print ("Handle Ch. 1 Settings")
             return 2 + 3
-        if self.conf2.handleTouch( touch, drag ) > 1:
+        if self.configurators[2].handleTouch( touch, drag ) > 1:
             # handle settings request ch. 1
             print ("Handle Ch. 2 Settings")
             return 2 + 4
-        if self.conf3.handleTouch( touch, drag ) > 1:
+        if self.configurators[3].handleTouch( touch, drag ) > 1:
             # handle settings request ch. 1
             print ("Handle Ch. 3 Settings")
             return 2 + 5
-        if self.conf4.handleTouch( touch, drag ) > 1:
+        if self.configurators[4].handleTouch( touch, drag ) > 1:
             # handle settings request ch. 1
             print ("Handle Ch. 4 Settings")
             return 2 + 6
-        if self.conf5.handleTouch( touch, drag ) > 1:
+        if self.configurators[0].handleTouch( touch, drag ) > 1:
             # handle settings request ch. 1
-            print ("Handle Ch. 5 Settings")
+            print ("Handle Sensor Settings")
             return 2 + 7
 
         return 0

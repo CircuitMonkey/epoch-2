@@ -22,7 +22,7 @@
 30 = Save to Faves
 31 = Load from Faves
 """
-ch_en = [True,True,True,True,True,True,True,True]
+ch_en = [True,True,True,True,True,True,True,True,True] # 0 = Sensor
 
 mode_manual_slider = [0,0,0,0, 0,0,0,0, 0,0] # ch1-8 + spd + dwell
 
