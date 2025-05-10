@@ -23,7 +23,7 @@
 31 = Load from Faves
 """
 modes = [
-    [1, 31, 32, 20, 21, 22, 23, 24, 25, 26, 27], # 0 - Configure
+    [1, 30, 31, 20, 21, 22, 23, 24, 25, 26, 27], # 0 - Configure
     [2,3,4,5,6], # 1 - Mode Select
     [1], # 2 - Manual
     [1], # 3 - Cycle
@@ -43,14 +43,14 @@ modes = [
     [1], # 17 - XX
     [1], # 18 - XX
     [1], # 19 - XX
-    [0], # 20 - Config Ch. 1
-    [0], # 21 - Config Ch. 2
-    [0], # 22 - Config Ch. 3
-    [0], # 23 - Config Ch. 4
-    [0], # 24 - Config Ch. 5
-    [0], # 25 - Config Ch. 6
-    [0], # 26 - Config Ch. 7
-    [0], # 27 - Config Ch. 8
+    [0], # 20 - Settings Ch. 1
+    [0], # 21 - Settings Ch. 2
+    [0], # 22 - Settings Ch. 3
+    [0], # 23 - Settings Ch. 4
+    [0], # 24 - Settings Ch. 5
+    [0], # 25 - Settings Ch. 6
+    [0], # 26 - Settings Ch. 7
+    [0], # 27 - Settings Ch. 8
     [0], # 28 - XX (unused)
     [0], # 29 - XX (unused)
     [0], # 30 - Save to Favs
@@ -64,8 +64,8 @@ title = ["Configure", "Select Mode",
     "Unused", "Unused", "Unused", "Unused", "Unused",
     "Unused", "Unused", "Unused", "Unused", "Unused",
     "Unused", "Unused", "Unused",
-    "Configure 1", "Configure 2", "Configure 3", "Configure 4",
-    "Configure 5", "Configure 6", "Configure 7", "Configure 8",
+    "Settings Ch. 1", "Settings Ch. 2", "Settings Ch. 3", "Settings Ch. 4",
+    "Settings Ch. 5", "Settings Ch. 6", "Settings Ch. 7", "Settings Ch. 8",
     "Unused", "Unused",
-    "Save to Faves", "Load from Faves"
+    "Save Fave", "Choose Fave"
 ]
