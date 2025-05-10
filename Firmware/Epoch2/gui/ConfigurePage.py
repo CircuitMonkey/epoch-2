@@ -7,10 +7,10 @@ class ConfigurePage(Page):
     def __init__(self, glyphs_img, glyphs_palette, font):
         super().__init__()
 
-        self.conf1 = Configurator( 64, 64, 1, glyphs_img, glyphs_palette, 42, font )
-        self.conf2 = Configurator( 128, 64, 2, glyphs_img, glyphs_palette, 43, font )
-        self.conf3 = Configurator( 192, 64, 3, glyphs_img, glyphs_palette, 44, font )
-        self.conf4 = Configurator( 256, 64, 4, glyphs_img, glyphs_palette, 45, font )
+        self.conf1 = Configurator( 64, 64, 1, glyphs_img, glyphs_palette, 28, font )
+        self.conf2 = Configurator( 128, 64, 2, glyphs_img, glyphs_palette, 29, font )
+        self.conf3 = Configurator( 192, 64, 3, glyphs_img, glyphs_palette, 30, font )
+        self.conf4 = Configurator( 256, 64, 4, glyphs_img, glyphs_palette, 31, font )
         self.conf5 = Configurator( 400, 64, "s", glyphs_img, glyphs_palette, 33, font )
 
         self.savFavButton = ImageButton(0, 400, 2, 12, glyphs_img, glyphs_palette)

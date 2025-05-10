@@ -8,10 +8,10 @@ class ManualPage(Page):
     def __init__(self, glyphs_img, glyphs_palette, font):
         super().__init__()
         self.dragChannel = 0
-        self.slider1 = Slider( 0, 64, glyphs_img, glyphs_palette, 42, font )
-        self.slider2 = Slider( 64, 64, glyphs_img, glyphs_palette, 43, font )
-        self.slider3 = Slider( 128, 64, glyphs_img, glyphs_palette, 44, font )
-        self.slider4 = Slider( 196, 64, glyphs_img, glyphs_palette, 45, font )
+        self.slider1 = Slider( 0, 64, glyphs_img, glyphs_palette, 28, font )
+        self.slider2 = Slider( 64, 64, glyphs_img, glyphs_palette, 29, font )
+        self.slider3 = Slider( 128, 64, glyphs_img, glyphs_palette, 30, font )
+        self.slider4 = Slider( 196, 64, glyphs_img, glyphs_palette, 31, font )
         self.slider5 = Slider( 256, 64, glyphs_img, glyphs_palette, 34, font )
         self.slider6 = Slider( 320, 64, glyphs_img, glyphs_palette, 47, font )
         self.indicator = Indicator( 402, 64, glyphs_img, glyphs_palette, 33, font )
