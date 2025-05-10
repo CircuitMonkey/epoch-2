@@ -167,12 +167,10 @@ class Slider(displayio.Group):
         self.value = int(value)
         print(f"New Value: {self.value}")
         self.slider.y = int(self.SLIDER_TOP + (99-value)/99 * (self.SLIDE_RANGE))
-        # self.slider.y = self.SLIDER_BOTTOM - ((self.SLIDER_TOP + value * (self.SLIDE_RANGE)) / 99)
         self.number_text.text = str( int(value) )
-        # Move the slider
 
     def set_channel_a_value(self, value):
-        # Move the dot
+        # TODO: Move the dot
         a = 1
 
     def set_channel_b_value(self, value):
@@ -202,29 +200,24 @@ class Slider(displayio.Group):
             newValue = 99 - 99*(sliderY - self.SLIDER_TOP)/self.SLIDE_RANGE
             self.set_slider_value(newValue)
 
-            #newValue = int( 99 - ((self.slider.y - (self.SLIDER_TOP))/((self.SLIDER_BOTTOM)-(self.SLIDER_TOP))) * 99)
-            # if sliderY >= 64: # top OK
-            #     if sliderY <= 204: # bottom OK
-            #         self.slider.y = sliderY
-            #     else: # clamp it to bottom
-            #         self.slider.y = self.SLIDER_BOTTOM
-            #         print( f"Clamp BOTTOM: {self.slider.y}" )
-            # else: # clamp it to top
-            #     self.slider.y = self.SLIDER_TOP
-            #     print( f"Clamp TOP: {self.slider.y}" )
-            # self.number_text.text = str( int( 99 - ((self.slider.y - (64-16))/((192+16)-(64-16))) * 99)  )
-            # self.setSliderValue(int( 99 - ((self.slider.y - (self.SLIDER_TOP))/((self.SLIDER_BOTTOM)-(self.SLIDER_TOP))) * 99))
             return 1 # continue dragging
 
         return 0
 
 class Configurator(displayio.Group):
-    def __init__(self, gx, gy, lbl, img, img_palette, glyph, font):
+    def __init__(self, gx, gy, channel, state, img, img_palette, glyph, font):
         super().__init__()
         self.x = gx
         self.y = gy
+        self.channel = channel
+        self.state = state
 
-        number_text = Label(font, text=str(lbl), color=0xEEEEEE)
+        if channel == 0:
+            label = str("s")
+        else:
+            label = str(channel)
+
+        number_text = Label(font, text=label, color=0xEEEEEE)
         number_text.anchor_point = (0.5, 0.5)
         number_text.anchored_position = (32, 32)
         self.append(number_text)
@@ -263,6 +256,7 @@ class Configurator(displayio.Group):
         )
         self.checkmark[0] = 19
         self.checkmark.y = 128
+        self.checkmark.hidden = not self.state.ch_en[channel]
         self.append(self.checkmark)
 
     def handleTouch(self, touch, drag):
@@ -277,6 +271,7 @@ class Configurator(displayio.Group):
             if tY >= cY and tY <= (cY + 64):
                 print( "Checkbox pressed")
                 self.checkmark.hidden = not self.checkmark.hidden
+                self.state.ch_en[self.channel] = not self.checkmark.hidden
                 return 0
 
         gX = self.x+self.gear.x

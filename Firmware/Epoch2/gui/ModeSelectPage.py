@@ -3,7 +3,7 @@ from gui.Page import Page
 from gui.Widgets import ImageButton
 
 class ModeSelectPage(Page):
-    def __init__(self, glyphs_img, glyphs_palette):
+    def __init__(self, state, glyphs_img, glyphs_palette):
         super().__init__()
         self.x = 48 # center on screen
         self.manualButton = ImageButton(0,128,1,35, glyphs_img, glyphs_palette)

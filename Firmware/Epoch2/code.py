@@ -31,11 +31,11 @@ def switchPage( st, img, img_palette, fontS, fontL ):
     print (f"Switch to Mode: {st.mode}")
     # see state.modes for list of possible modes
     if ( st.mode == 0 ): # Configure
-        pg = ConfigurePage(img, img_palette, fontL)
+        pg = ConfigurePage(state, img, img_palette, fontL)
     elif ( st.mode == 1 ):
-        pg = ModeSelectPage(img, img_palette)
+        pg = ModeSelectPage(state, img, img_palette)
     elif ( st.mode == 2 ):
-        pg = ManualPage(img, img_palette, fontS)
+        pg = ManualPage(state, img, img_palette, fontS)
     # elif ( st.mode == 3 ):
     #     page = CycleMode(img, img_palette)
     # elif ( st.mode == 4 ):
@@ -45,13 +45,13 @@ def switchPage( st, img, img_palette, fontS, fontL ):
     # elif ( st.mode == 5 ):
     #    page = PullMode(img, img_palette)
     elif ( st.mode == 20 ):
-        pg = ChannelSettingsPage(img, img_palette, fontS)
+        pg = ChannelSettingsPage( state, img, img_palette, fontS)
     elif ( st.mode == 30 ):
-        pg = Save2FavesPage(img, img_palette, fontS)
+        pg = Save2FavesPage(state, img, img_palette, fontS)
     elif ( st.mode == 31 ):
-        pg = LoadFromFavesPage(img, img_palette, fontS)
+        pg = LoadFromFavesPage(state, img, img_palette, fontS)
     else: # 99 Error Page?
-        pg = ConfigurePage(img, img_palette, fontL)
+        pg = ConfigurePage(state, img, img_palette, fontL)
 
 
     # Note: You should call display.refresh() after calling this.
@@ -110,7 +110,7 @@ bg_group.append(rect)
 glyphs_img, glyphs_palette = adafruit_imageload.load("gui/glyphs-8.png")
 
 upper_label.text = state.title[state.mode]
-page = ConfigurePage(glyphs_img, glyphs_palette, font)
+page = ConfigurePage(state, glyphs_img, glyphs_palette, font)
 group.append(page)
 
 bg_group.remove(splash_grid)

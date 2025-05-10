@@ -4,14 +4,14 @@ from gui.Widgets import ImageButton
 from gui.Widgets import TextButton
 
 class ConfigurePage(Page):
-    def __init__(self, glyphs_img, glyphs_palette, font):
+    def __init__(self, state, glyphs_img, glyphs_palette, font):
         super().__init__()
 
-        self.conf1 = Configurator( 64, 64, 1, glyphs_img, glyphs_palette, 28, font )
-        self.conf2 = Configurator( 128, 64, 2, glyphs_img, glyphs_palette, 29, font )
-        self.conf3 = Configurator( 192, 64, 3, glyphs_img, glyphs_palette, 30, font )
-        self.conf4 = Configurator( 256, 64, 4, glyphs_img, glyphs_palette, 31, font )
-        self.conf5 = Configurator( 400, 64, "s", glyphs_img, glyphs_palette, 33, font )
+        self.conf1 = Configurator( 64, 64, 1, state, glyphs_img, glyphs_palette, 28, font )
+        self.conf2 = Configurator( 128, 64, 2, state, glyphs_img, glyphs_palette, 29, font )
+        self.conf3 = Configurator( 192, 64, 3, state, glyphs_img, glyphs_palette, 30, font )
+        self.conf4 = Configurator( 256, 64, 4, state, glyphs_img, glyphs_palette, 31, font )
+        self.conf5 = Configurator( 400, 64, 0, state, glyphs_img, glyphs_palette, 33, font )
 
         self.savFavButton = ImageButton(0, 400, 2, 12, glyphs_img, glyphs_palette)
         self.okButton = TextButton(196, 400, 2, "OK", glyphs_img, glyphs_palette, font)

@@ -2,7 +2,7 @@ from gui.Page import Page
 from gui.Widgets import ImageButton
 
 class ChannelSettingsPage(Page):
-    def __init__(self, glyphs_img, glyphs_palette, font):
+    def __init__(self, state, glyphs_img, glyphs_palette, font):
         super().__init__()
         self.x = 0
         self.backButton = ImageButton(416,0,1,6, glyphs_img, glyphs_palette)

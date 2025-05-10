@@ -22,6 +22,10 @@
 30 = Save to Faves
 31 = Load from Faves
 """
+ch_en = [True,True,True,True,True,True,True,True]
+
+mode_manual_slider = [0,0,0,0, 0,0,0,0, 0,0] # ch1-8 + spd + dwell
+
 modes = [
     [1, 30, 31, 20, 21, 22, 23, 24, 25, 26, 27], # 0 - Configure
     [2,3,4,5,6], # 1 - Mode Select
