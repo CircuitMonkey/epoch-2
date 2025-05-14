@@ -172,3 +172,8 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# KiCAD
+\#auto_saved_files\#
+*.lck
+/PCB/Output-Test-Board/Output-Test-Board-backups
