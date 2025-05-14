@@ -21,6 +21,7 @@ from gui.ModeSelectPage import ModeSelectPage
 from gui.ConfigurePage import ConfigurePage
 from gui.ChannelSettingsPage import ChannelSettingsPage
 from gui.FavesPage import *
+from Motors import *
 import framebuffer
 import state
 
@@ -119,6 +120,9 @@ display.refresh()
 # GT911 Touch - On 4x4x480 Display
 gt = gt911.GT911(i2c)
 
+# Vibe motors
+motors = Motors(i2c)
+
 # Main Loop
 drag = 0
 while True:
@@ -139,6 +143,7 @@ while True:
                     print("Touch is drag")
                 else: # touch is exit. tStat is code.
                     print(f"Mode returned exit page state. tstat={tStat}")
+                    page.updateMotors(motors)
 
                     # tStat-2 is state.modes[x][ ?, ?, ?, ...] index
                     # which is the actual number for the mode to switch to
@@ -151,6 +156,8 @@ while True:
                 display.refresh()
                 drag = 1
                 time.sleep(0.05)
+        page.updateGUI()
+        page.updateMotors(motors)
 
     except RuntimeError:
         print("pass")
