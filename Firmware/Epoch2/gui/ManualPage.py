@@ -9,6 +9,8 @@ class ManualPage(Page):
         super().__init__()
         self.state = state
         self.dragChannel = 0
+        self.state.pause = True
+
         self.sliders = [
             Slider( 0, 64, glyphs_img, glyphs_palette, 28, font ),
             Slider( 64, 64, glyphs_img, glyphs_palette, 29, font ),
@@ -23,13 +25,13 @@ class ManualPage(Page):
             self.append(e)
 
         self.indicator = Indicator( 402, 64, glyphs_img, glyphs_palette, 33, font )
-        self.pauseButton = ImageButton(0,416,4,40, glyphs_img, glyphs_palette)
+        self.pauseButton = ImageButton(0,416,4,41, glyphs_img, glyphs_palette)
         self.returnButton = ImageButton(416,0,1,6, glyphs_img, glyphs_palette)
         self.append(self.indicator.group)
         self.append(self.pauseButton)
         self.append(self.returnButton)
 
-    def destroy():
+    def destroy(self):
         self.remove(self.sliders[0])
         self.remove(self.sliders[1])
         self.remove(self.sliders[2])
@@ -40,6 +42,31 @@ class ManualPage(Page):
         self.remove(self.pauseButton)
         self.remove(self.returnButton)
 
+
+    def updateGUI(self):
+        # print("Update GUI")
+        # Update sensor value ==> indicator
+        # Update motor output values. ==> sliders
+        return
+
+    def updateMotors(self, motors):
+        if self.state.pause:
+            for ch in range(0,7):
+                motors.setMotor(ch, 0)
+        else:
+            for ch in range(0, 7, 1):
+                motors.setMotor(ch, self.state.mode_manual_slider[ch]) # 0-99
+                # motors.setMotor(ch + 1, state.mode_manual_slider[ch]) # 0-99
+
+        return
+
+    def togglePause(self):
+        self.state.pause = not self.state.pause
+        if self.state.pause:
+            self.pauseButton.glyph[0] = 41
+        else:
+            self.pauseButton.glyph[0] = 40
+        print(f"Pause Toggled: {str(self.state.pause)}")
 
     def clearTouch( self ):
         if self.dragChannel > 0:
@@ -56,10 +83,11 @@ class ManualPage(Page):
         # Return index of state.modes[mode] + 2 (because we use 0,1 here)
         if  ty >=0 and ty < 64:
             if tx > self.returnButton.x and tx < self.returnButton.x+64:
+                self.state.pause = True
                 return 2
         elif ty > 416 and ty < 480:
             if tx > self.pauseButton.x and tx < self.pauseButton.x+(4*64):
-                print("Pause Pressed")
+                self.togglePause()
                 return 1 # Handled and now its a drag.
         if (self.dragChannel == 0 or self.dragChannel == 1) and self.sliders[0].handleTouch(touch, drag) > 0:
             self.dragChannel = 1
