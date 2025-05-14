@@ -25,6 +25,11 @@ class ModeSelectPage(Page):
         self.remove(self.plungeButton)
         self.remove(self.pullButton)
 
+    def updateMotors(self, motors):
+        for ch in range(0,7):
+            motors.setMotor(ch, 0)
+        return
+
     def handleTouch( self, touch, drag ):
         if drag > 0: return 1 # we don't handle drags
         tx = touch[0] - self.x
