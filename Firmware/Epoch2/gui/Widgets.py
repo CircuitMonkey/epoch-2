@@ -106,7 +106,7 @@ class Indicator:
         self.pointer.y = 204 - value
 
 
-    def set_location( x, y):
+    def set_location( self, x, y):
         self.group.x = x
         self.group.y = y
 
@@ -129,7 +129,17 @@ class Slider(displayio.Group):
             width=1, height=5,
             tile_width=64, tile_height=64
         )
-        self.background[0] = glyph
+        self.append(self.background)
+
+        if glyph > 16:
+            self.background[0] = glyph
+        else:
+            self.background[0] = 0 # blank
+            self.label = Label(font, text=str(glyph), color=0x77EE77)
+            self.label.anchor_point = (0.5, 0.5)
+            self.label.anchored_position = (32, 32)
+            self.append(self.label)
+
         self.background[1] = 8
         self.background[2] = 15
         self.background[3] = 22
@@ -142,8 +152,8 @@ class Slider(displayio.Group):
         self.slider[0] = 27
         self.slider.y = self.SLIDER_BOTTOM
 
-        self.append(self.background)
         self.append(self.slider)
+
         # TODO: Number
         self.number_text = Label(font, text="99", color=0x77EE77)
         self.number_text.anchor_point = (0.5, 0.5)
@@ -154,6 +164,16 @@ class Slider(displayio.Group):
         self.dragStart = 0
         self.sliderStart = 0
         self.set_slider_value(0)
+
+    # If a number label(not glyph) was used, update it's displayed int value
+    def set_label( self, intVal ):
+        try:
+            self.label # throws error if Widget uses Glyph
+        except NameError:
+            # print("well, it WASN'T defined after all!")
+            return # do nothing
+        else:
+            self.label.text = str(intVal)
 
     def set_slider_value(self, value):
         # Range check 0-99
@@ -170,7 +190,7 @@ class Slider(displayio.Group):
         self.number_text.text = str( int(value) )
 
     def set_channel_a_value(self, value):
-        # TODO: Move the dot
+        # Move the dot
         a = 1
 
     def set_channel_b_value(self, value):
