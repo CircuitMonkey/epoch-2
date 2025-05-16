@@ -16,7 +16,7 @@ class Motors():
     # while the PCA9685 takes values up to 12-bits, our range is 0-99
     # so we scale the value such that 99 is close to 12-bit max of 0xFFFF
     def setMotor( self, channel, value ):
-        self.pca.channels[channel].duty_cycle = int(value * 2.57) << 4   #0x7FFF == 50%
+        self.pca.channels[channel].duty_cycle = int(value * 0x1AC)   #0x7FFF ~= 50%
 
     def destroy(self):
         return
