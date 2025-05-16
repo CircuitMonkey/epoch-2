@@ -24,7 +24,10 @@
 """
 ch_en = [True,True,True,True,True,True,True,True,True] # 0 = Sensor
 
-mode_manual_slider = [0,0,0,0, 0,0,0,0, 0,0] # ch1-8 + spd + dwell
+mode_manual_slider = [0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0] # ch1-16
+# mode_manual_show_slider_group = 0 # 0:1..4, 1: 5..8, 2:9..12,  3:12..16
+
+mode_cycle_slider = [0,0,0,0, 0,0,0,0, 0,0] # groups 1..4 + spd + dwell
 
 paused = True
 
