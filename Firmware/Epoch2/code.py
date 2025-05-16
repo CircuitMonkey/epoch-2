@@ -136,6 +136,8 @@ while True:
             for touch in touches:
                 #x = touch[0]
                 #y = touch[1]
+
+                #TODO:  Add try-catch and turn off motors if exception
                 tStat = page.handleTouch( touch, drag)
                 if ( tStat == 0 ):
                     print("Touch handled.")
