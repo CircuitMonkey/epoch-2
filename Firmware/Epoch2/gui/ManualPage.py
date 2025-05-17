@@ -56,11 +56,12 @@ class ManualPage(Page):
 
     def updateMotors(self, motors):
         if self.state.pause:
-            for ch in range(0,15):
+            for ch in range(16):
                 motors.setMotor(ch, 0)
         else:
-            for ch in range(0, 3):
-                motors.setMotor(self.slider_group*4+ch, self.state.mode_manual_slider[ch]) # 0-99
+            for ch in range(16):
+                motors.setMotor(ch, self.state.mode_manual_slider[ch])
+                #motors.setMotor(self.slider_group*4+ch, self.state.mode_manual_slider[ch]) # 0-99
 
         return
 
@@ -114,7 +115,9 @@ class ManualPage(Page):
                 if self.slider_group > 3:
                     self.slider_group = 3
                 for i in range(4):
-                    self.sliders[i].set_label(self.slider_group*4 + i + 1)
+                    sliderIndex = self.slider_group*4+i
+                    self.sliders[i].set_label(sliderIndex + 1)
+                    self.sliders[i].set_slider_value(self.state.mode_manual_slider[sliderIndex])
 
                 self.updateLeftRight()
 
@@ -129,7 +132,9 @@ class ManualPage(Page):
                 if self.slider_group > 3:
                     self.slider_group = 3
                 for i in range(4):
-                    self.sliders[i].set_label(self.slider_group*4 + i + 1)
+                    sliderIndex = self.slider_group*4+i
+                    self.sliders[i].set_label(sliderIndex + 1)
+                    self.sliders[i].set_slider_value(self.state.mode_manual_slider[sliderIndex])
 
                 self.updateLeftRight()
 
@@ -139,25 +144,25 @@ class ManualPage(Page):
         if (self.dragChannel == 0 or self.dragChannel == 1) and self.sliders[0].handleTouch(touch, drag) > 0:
             self.dragChannel = 1
             stateSlider = self.slider_group * 4 + 0
-            self.state.mode_manual_slider[self.dragChannel-1] = self.sliders[self.dragChannel-1].value
+            self.state.mode_manual_slider[stateSlider] = self.sliders[self.dragChannel-1].value
             # print( f"drag slider {self.dragChannel}" )
             return 1
         if (self.dragChannel == 0 or self.dragChannel == 2) and self.sliders[1].handleTouch(touch, drag) > 0:
             self.dragChannel = 2
-            stateSlider = self.slider_group * 4 + 0
-            self.state.mode_manual_slider[self.dragChannel-1] = self.sliders[self.dragChannel-1].value
+            stateSlider = self.slider_group * 4 + 1
+            self.state.mode_manual_slider[stateSlider] = self.sliders[self.dragChannel-1].value
             # print( f"drag slider {self.dragChannel}" )
             return 1
         if (self.dragChannel == 0 or self.dragChannel == 3) and self.sliders[2].handleTouch(touch, drag) > 0:
             self.dragChannel = 3
-            stateSlider = self.slider_group * 4 + 0
-            self.state.mode_manual_slider[self.dragChannel-1] = self.sliders[self.dragChannel-1].value
+            stateSlider = self.slider_group * 4 + 2
+            self.state.mode_manual_slider[stateSlider] = self.sliders[self.dragChannel-1].value
             # print( f"drag slider {self.dragChannel}" )
             return 1
         if (self.dragChannel == 0 or self.dragChannel == 4) and self.sliders[3].handleTouch(touch, drag) > 0:
             self.dragChannel = 4
-            stateSlider = self.slider_group * 4 + 0
-            self.state.mode_manual_slider[self.dragChannel-1] = self.sliders[self.dragChannel-1].value
+            stateSlider = self.slider_group * 4 + 3
+            self.state.mode_manual_slider[stateSlider] = self.sliders[self.dragChannel-1].value
             # print( f"drag slider {self.dragChannel}" )
             return 1
 
