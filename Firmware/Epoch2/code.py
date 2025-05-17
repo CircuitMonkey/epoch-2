@@ -1,9 +1,13 @@
-# Uses some code from AdaFruit Qualia ESP32-S3 examples.
+# Uses some 'displayio' code from AdaFruit Qualia ESP32-S3 examples.
 # SPDX-FileCopyrightText: 2021 ladyada for Adafruit Industries
 # SPDX-License-Identifier: MIT
 """
-Epoch 2 Vibrator Controller using the Adafruit Qualia ESP32-S3 RGB666
-with the 4.0" square display and GT911 captouch driver
+    Epoch 2 Vibrator Controller using the Adafruit Qualia ESP32-S3 RGB666
+    with the 4.0" square display and GT911 captouch driver
+
+    by Mark J. Koch - c2025
+
+    Provided under MIT license.
 """
 import board
 import displayio
@@ -71,6 +75,12 @@ dotclockframebuffer.ioexpander_send_init_sequence(
     i2c, framebuffer.init_sequence_4x4_480, **tft_io_expander
 )
 
+# Vibe motors
+motors = Motors(i2c)
+# Clear motor state right away if a reset happened.
+for ch in range(16):
+    motors.setMotor(ch, 0)
+
 fb = dotclockframebuffer.DotClockFramebuffer(**tft_pins, **framebuffer.tft_timings)
 display = FramebufferDisplay(fb, auto_refresh=False)
 # display.auto_refresh = True
@@ -120,8 +130,6 @@ display.refresh()
 # GT911 Touch - On 4x4x480 Display
 gt = gt911.GT911(i2c)
 
-# Vibe motors
-motors = Motors(i2c)
 
 # Main Loop
 drag = 0
