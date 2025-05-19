@@ -20,7 +20,8 @@ import time
 from adafruit_display_shapes.rect import Rect
 from adafruit_bitmap_font import bitmap_font
 from adafruit_display_text.label import Label
-from gui.ManualPage import ManualPage
+from gui.ManualPage import *
+from gui.CyclePage import *
 from gui.ModeSelectPage import ModeSelectPage
 from gui.ConfigurePage import ConfigurePage
 from gui.ChannelSettingsPage import ChannelSettingsPage
@@ -28,6 +29,7 @@ from gui.FavesPage import *
 from Motors import *
 import framebuffer
 import state
+import time
 
 # import supervisor
 # supervisor.runtime.autoreload = False
@@ -41,8 +43,8 @@ def switchPage( st, img, img_palette, fontS, fontL ):
         pg = ModeSelectPage(state, img, img_palette)
     elif ( st.mode == 2 ):
         pg = ManualPage(state, img, img_palette, fontS)
-    # elif ( st.mode == 3 ):
-    #     page = CycleMode(img, img_palette)
+    elif ( st.mode == 3 ):
+        pg = CyclePage(state, img, img_palette, fontS)
     # elif ( st.mode == 4 ):
     #     page = PendulumMode(img, img_palette)
     # elif ( st.mode == 5 ):
@@ -134,6 +136,9 @@ gt = gt911.GT911(i2c)
 # Main Loop
 drag = 0
 while True:
+
+#    start_time = time.monotonic()
+
     try:
         touches = gt.touches
         if len(touches) < 1:
@@ -149,8 +154,10 @@ while True:
                 tStat = page.handleTouch( touch, drag)
                 if ( tStat == 0 ):
                     print("Touch handled.")
+                    pass
                 elif( tStat == 1): # touch is drag
                     print("Touch is drag")
+                    pass
                 else: # touch is exit. tStat is code.
                     print(f"Mode returned exit page state. tstat={tStat}")
                     page.updateMotors(motors)
@@ -166,10 +173,16 @@ while True:
                 display.refresh()
                 drag = 1
                 time.sleep(0.05)
+
+
         page.updateGUI()
+        display.refresh()
         page.updateMotors(motors)
 
     except RuntimeError:
         print("pass")
         pass
 
+#    end_time = time.monotonic()
+#    elapsed_time = end_time - start_time
+#    print("Elapsed time: ", elapsed_time, "seconds")
