@@ -123,6 +123,9 @@ class Slider(displayio.Group):
         self.SLIDER_BOTTOM = int(192 + self.THUMB_WS )
         self.SLIDE_RANGE = self.SLIDER_BOTTOM - self.SLIDER_TOP
 
+        self.MOT_TOP = self.SLIDER_TOP - 8
+        self.MOT_RANGE = self.SLIDE_RANGE + 16
+
         self.value = 0
         self.background = displayio.TileGrid(
             img, pixel_shader=img_palette,
@@ -133,7 +136,7 @@ class Slider(displayio.Group):
 
         if glyph > 16:
             self.background[0] = glyph
-        else:
+        else: # glyphs less than 16 are a number label
             self.background[0] = 0 # blank
             self.label = Label(font, text=str(glyph), color=0x77EE77)
             self.label.anchor_point = (0.5, 0.5)
@@ -159,11 +162,38 @@ class Slider(displayio.Group):
         self.number_text.anchor_point = (0.5, 0.5)
         self.number_text.anchored_position = (32, 280)
         self.append(self.number_text)
+
         # TODO: Channel Values
+        self.motA = displayio.TileGrid(
+            img, pixel_shader=img_palette,
+            width=1, height=1,
+            tile_width=64, tile_height=64
+        )
+        self.motA[0] = 46
+        self.motA.x = -12
+        self.set_channel_a_value(0)
+        self.motA.y = self.MOT_TOP + self.MOT_RANGE
+        self.append(self.motA)
+        self.motA.hidden = True # hidden by default.
+
+        self.motB = displayio.TileGrid(
+            img, pixel_shader=img_palette,
+            width=1, height=1,
+            tile_width=64, tile_height=64
+        )
+        self.motB[0] = 46
+        self.motB.x = 12
+        self.set_channel_b_value(0)
+        self.append(self.motB)
+        self.motB.hidden = True # hidden by default.
 
         self.dragStart = 0
         self.sliderStart = 0
         self.set_slider_value(0)
+
+    def showMotIndicators( self, show ):
+            self.motA.hidden = not show
+            self.motB.hidden = not show
 
     # If a number label(not glyph) was used, update it's displayed int value
     def set_label( self, intVal ):
@@ -191,11 +221,11 @@ class Slider(displayio.Group):
 
     def set_channel_a_value(self, value):
         # Move the dot
-        a = 1
+        self.motA.y = int(self.MOT_TOP + (99-value)/99 * (self.MOT_RANGE))
 
     def set_channel_b_value(self, value):
         # Move the dot
-        b = 2
+        self.motB.y = int(self.MOT_TOP + (99-value)/99 * (self.MOT_RANGE))
 
     def handleTouch(self, touch, drag):
         tX = touch[0]
