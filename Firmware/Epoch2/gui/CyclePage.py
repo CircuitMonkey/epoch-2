@@ -1,3 +1,19 @@
+#   Cycle Mode for Epoch 2 Vibrator Controller
+#   https://github.com/CircuitMonkey/epoch-2
+#
+#   by Mark J. Koch (@maehem on GitHub) - c2025
+#
+#   Provided under MIT license.
+#
+#   This mode activates each vibrator briefly in a
+#   cyclic pattern.  The sensation would be that of
+#   a "swirl" going up the left side and then continuing
+#   down the right side until all motors have been activated.
+#   After some delay, using a slider, the cycle repeats.
+#   The cycle speed also has some control using a slider.
+#
+
+
 import displayio
 from gui.Page import Page
 from gui.Widgets import Slider
@@ -11,6 +27,12 @@ class CyclePage(Page):
         self.dragChannel = 0
         self.state.pause = True
 
+        self.tick = 0
+        self.tickMax = 20
+        self.envelope = [ 60,99,80,25 ]
+        self.envLen = len(self.envelope)
+        self.tickOffset = [0,18,3,15,5,13,8,10] # negative envelope offset of 8 channels
+
         self.sliders = [
             Slider( 0, 64, glyphs_img, glyphs_palette, 28, font ),
             Slider( 64, 64, glyphs_img, glyphs_palette, 29, font ),
@@ -23,6 +45,11 @@ class CyclePage(Page):
         for i, e in enumerate(self.sliders):
             e.set_slider_value(state.mode_manual_slider[i])
             self.append(e)
+
+        self.sliders[0].showMotIndicators(True)
+        self.sliders[1].showMotIndicators(True)
+        self.sliders[2].showMotIndicators(True)
+        self.sliders[3].showMotIndicators(True)
 
         self.indicator = Indicator( 402, 64, glyphs_img, glyphs_palette, 33, font )
         self.pauseButton = ImageButton(0,416,4,41, glyphs_img, glyphs_palette)
@@ -46,17 +73,48 @@ class CyclePage(Page):
     def updateGUI(self):
         # print("Update GUI")
         # Update sensor value ==> indicator
-        # Update motor output values. ==> sliders
+
+        # Calculate state.motor values
+        # Update Tick
+        if not self.state.pause:
+            self.tick += 1
+        if self.tick > self.tickMax:
+            self.tick = 0
+
+        for ch in range(8):
+            idx = self.tick - self.tickOffset[ch]
+            if idx < 0:
+                idx += 64
+
+            if idx < self.envLen:
+                motVal = self.envelope[idx]
+            else:
+                motVal = 0
+
+            self.state.mode_cycle_motors[ch] = motVal
+
+
+        # Update slider motor indicator based on slider settings and tick.
+        self.sliders[0].set_channel_a_value(self.state.mode_cycle_motors[0])
+        self.sliders[0].set_channel_b_value(self.state.mode_cycle_motors[1])
+        self.sliders[1].set_channel_a_value(self.state.mode_cycle_motors[2])
+        self.sliders[1].set_channel_b_value(self.state.mode_cycle_motors[3])
+        self.sliders[2].set_channel_a_value(self.state.mode_cycle_motors[4])
+        self.sliders[2].set_channel_b_value(self.state.mode_cycle_motors[5])
+
+        # Wand
+        self.sliders[3].set_channel_a_value(self.state.mode_cycle_motors[6])
+        self.sliders[3].set_channel_b_value(self.state.mode_cycle_motors[7])
+
         return
 
     def updateMotors(self, motors):
         if self.state.pause:
-            for ch in range(0,7):
+            for ch in range(16):
                 motors.setMotor(ch, 0)
         else:
-            for ch in range(0, 7, 1):
-                motors.setMotor(ch, self.state.mode_manual_slider[ch]) # 0-99
-                # motors.setMotor(ch + 1, state.mode_manual_slider[ch]) # 0-99
+            for ch in range(16):
+                motors.setMotor(ch, self.state.mode_cycle_motors[ch])
 
         return
 
