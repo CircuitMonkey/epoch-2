@@ -26,7 +26,7 @@ ch_en = [True,True,True,True,True,True,True,True,True] # 0 = Sensor
 
 mode_manual_slider = [0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0] # ch1-16
 
-mode_cycle_slider = [0,0,0,0, 0,0,0,0, 0,0] # groups 1..4 + spd + dwell
+mode_cycle_slider = [50,50,50,50, 50,20] # groups 1..4 + spd + dwell
 mode_cycle_motors = [0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0] # ch1-16
 
 paused = True
