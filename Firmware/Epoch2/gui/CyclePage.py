@@ -29,6 +29,7 @@ class CyclePage(Page):
 
         self.tick = 0
         self.tickMax = 20
+        self.dwell = 0
         self.envelope = [ 60,99,80,25 ]
         self.envLen = len(self.envelope)
         self.tickOffset = [0,18,3,15,5,13,8,10] # negative envelope offset of 8 channels
@@ -43,7 +44,7 @@ class CyclePage(Page):
         ]
 
         for i, e in enumerate(self.sliders):
-            e.set_slider_value(state.mode_manual_slider[i])
+            e.set_slider_value(state.mode_cycle_slider[i])
             self.append(e)
 
         self.sliders[0].showMotIndicators(True)
@@ -57,6 +58,7 @@ class CyclePage(Page):
         self.append(self.indicator.group)
         self.append(self.pauseButton)
         self.append(self.returnButton)
+
 
     def destroy(self):
         self.remove(self.sliders[0])
@@ -77,12 +79,18 @@ class CyclePage(Page):
         # Calculate state.motor values
         # Update Tick
         if not self.state.pause:
-            self.tick += 1
+            if self.dwell > 0:
+                self.dwell -= 1
+            else:
+                self.tick += self.sliders[4].value/99.0
+                self.dwell = 0
+
         if self.tick > self.tickMax:
             self.tick = 0
+            self.dwell = self.sliders[5].value
 
         for ch in range(8):
-            idx = self.tick - self.tickOffset[ch]
+            idx = int(self.tick) - self.tickOffset[ch]
             if idx < 0:
                 idx += 64
 
@@ -93,7 +101,12 @@ class CyclePage(Page):
 
             self.state.mode_cycle_motors[ch] = motVal
 
+        for sld in range(4):
+            mtr = sld*2
+            self.state.mode_cycle_motors[sld*2] = int(self.sliders[sld].value * self.state.mode_cycle_motors[sld*2] / 99)
+            self.state.mode_cycle_motors[sld*2+1] = int(self.sliders[sld].value * self.state.mode_cycle_motors[sld*2+1] / 99)
 
+        # todo: Move into loop above
         # Update slider motor indicator based on slider settings and tick.
         self.sliders[0].set_channel_a_value(self.state.mode_cycle_motors[0])
         self.sliders[0].set_channel_b_value(self.state.mode_cycle_motors[1])
