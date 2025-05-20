@@ -126,7 +126,6 @@ class Slider(displayio.Group):
         self.MOT_TOP = self.SLIDER_TOP - 8
         self.MOT_RANGE = self.SLIDE_RANGE + 16
 
-        self.value = 0
         self.background = displayio.TileGrid(
             img, pixel_shader=img_palette,
             width=1, height=5,
@@ -189,7 +188,7 @@ class Slider(displayio.Group):
 
         self.dragStart = 0
         self.sliderStart = 0
-        self.set_slider_value(0)
+        self.set_slider_value(50)
 
     def showMotIndicators( self, show ):
             self.motA.hidden = not show
