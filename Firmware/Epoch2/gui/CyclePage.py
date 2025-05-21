@@ -30,7 +30,8 @@ class CyclePage(Page):
         self.tick = 0
         self.tickMax = 20
         self.dwell = 0
-        self.envelope = [ 60,99,80,25 ]
+        self.dwellMult = 0.5
+        self.envelope = [ 0, 60,99,60,25 ]
         self.envLen = len(self.envelope)
         self.tickOffset = [0,18,3,15,5,13,8,10] # negative envelope offset of 8 channels
 
@@ -52,12 +53,28 @@ class CyclePage(Page):
         self.sliders[2].showMotIndicators(True)
         self.sliders[3].showMotIndicators(True)
 
+        # non-activated 'epoch' button
+        self.epochGlyph = displayio.TileGrid(
+            glyphs_img, pixel_shader=glyphs_palette,
+            width=1, height=1,
+            tile_width=64, tile_height=64
+        )
+        self.append(self.epochGlyph)
+        self.epochGlyph[0] = 48
+        self.epochGlyph.x = 416
+        self.epochGlyph.y = 416
+        # Activated 'epoch'
+        self.epochButton = ImageButton(416,416,1,46, glyphs_img, glyphs_palette)
+        self.append(self.epochButton)
+        self.epochButton.hidden = True
+
         self.indicator = Indicator( 402, 64, glyphs_img, glyphs_palette, 33, font )
         self.pauseButton = ImageButton(0,416,4,41, glyphs_img, glyphs_palette)
         self.returnButton = ImageButton(416,0,1,6, glyphs_img, glyphs_palette)
         self.append(self.indicator.group)
         self.append(self.pauseButton)
         self.append(self.returnButton)
+
 
 
     def destroy(self):
@@ -87,7 +104,7 @@ class CyclePage(Page):
 
         if self.tick > self.tickMax:
             self.tick = 0
-            self.dwell = self.sliders[5].value
+            self.dwell = self.sliders[5].value * self.dwellMult
 
         for ch in range(8):
             idx = int(self.tick) - self.tickOffset[ch]
@@ -152,14 +169,15 @@ class CyclePage(Page):
         ty = touch[1]
         print(f"Handle ManualMode Touches => X: {tx}, Y: {ty}")
         # Return index of state.modes[mode] + 2 (because we use 0,1 here)
-        if  ty >=0 and ty < 64:
-            if tx > self.returnButton.x and tx < self.returnButton.x+64:
+        if self.returnButton.isTouched(tx,ty):
                 self.state.pause = True
                 return 2
-        elif ty > 416 and ty < 480:
-            if tx > self.pauseButton.x and tx < self.pauseButton.x+(4*64):
+        if self.pauseButton.isTouched(tx,ty):
                 self.togglePause()
                 return 1 # Handled and now its a drag.
+        if self.epochButton.isTouched(tx,ty):
+            print("epoch touched")
+            return 1
         if (self.dragChannel == 0 or self.dragChannel == 1) and self.sliders[0].handleTouch(touch, drag) > 0:
             self.dragChannel = 1
             self.state.mode_cycle_slider[self.dragChannel-1] = self.sliders[self.dragChannel-1].value
