@@ -64,6 +64,13 @@ class ImageButton(displayio.Group):
         self.append(self.background)
         self.append(self.glyph)
 
+    def isTouched( self, tx,ty ):
+        if  ty >=self.y and ty < self.y + 64:
+            if tx > self.x and tx < self.x+self.background.width*64:
+                return True
+
+        return False
+
 
 class Indicator:
     def __init__(self, gx, gy, img, img_palette, glyph, font):
