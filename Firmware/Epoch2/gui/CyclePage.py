@@ -39,7 +39,7 @@ class CyclePage(Page):
             Slider( 0, 64, glyphs_img, glyphs_palette, 28, font ),
             Slider( 64, 64, glyphs_img, glyphs_palette, 29, font ),
             Slider( 128, 64, glyphs_img, glyphs_palette, 30, font ),
-            Slider( 196, 64, glyphs_img, glyphs_palette, 31, font ),
+            Slider( 192, 64, glyphs_img, glyphs_palette, 31, font ),
             Slider( 256, 64, glyphs_img, glyphs_palette, 34, font ),
             Slider( 320, 64, glyphs_img, glyphs_palette, 47, font ),
         ]
