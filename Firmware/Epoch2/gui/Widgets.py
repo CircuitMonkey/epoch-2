@@ -111,6 +111,7 @@ class Indicator:
     def set_value(self, value):
         self.value = value
         self.pointer.y = 204 - value
+        self.number_text.text = str( int(value) )
 
 
     def set_location( self, x, y):
