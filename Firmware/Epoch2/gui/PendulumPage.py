@@ -27,13 +27,13 @@ class PendulumPage(Page):
         self.state.pause = True
 
         self.tick = 0
-        self.tickDir = 2
-        self.tickMax = 18
+        self.tickDir = 1
+        self.tickMax = 12
         self.dwell = 0
         self.dwellMult = 0.5
-        self.envelope = [ 20,60,99,60,20 ]
+        self.envelope = [ 10, 20,60,99,99,60,20, 10 ]
         self.envLen = len(self.envelope)
-        self.tickOffset = [-2,-2,4,4,10,10,16,16]
+        self.tickOffset = [-3,-3,1,1,5,5,9,9]
 
         self.sliders = [
             Slider( 0, 64, glyphs_img, glyphs_palette, 28, font ),
