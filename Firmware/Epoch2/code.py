@@ -134,10 +134,9 @@ gt = gt911.GT911(i2c)
 
 
 # Main Loop
-while True:
 drag = False
 
-#    start_time = time.monotonic()
+while True:
 
     try:
         touches = gt.touches
@@ -170,6 +169,7 @@ drag = False
                     upper_label.text = state.title[state.mode]
                     page = switchPage( state, glyphs_img, glyphs_palette, sm_font, font )
                     group.append(page)
+
                 display.refresh()
                 drag = True
                 time.sleep(0.05)
@@ -178,13 +178,15 @@ drag = False
         if not drag:
             page.updateGUI()
 
+        #start_time = time.monotonic()
         display.refresh()
+        #end_time = time.monotonic()
+        #elapsed_time = end_time - start_time
+        #print("Elapsed time: ", elapsed_time, "seconds")
+
         page.updateMotors(motors)
 
     except RuntimeError:
         print("pass")
         pass
 
-#    end_time = time.monotonic()
-#    elapsed_time = end_time - start_time
-#    print("Elapsed time: ", elapsed_time, "seconds")
