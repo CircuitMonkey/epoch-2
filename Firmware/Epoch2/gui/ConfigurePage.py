@@ -40,16 +40,15 @@ class ConfigurePage(Page):
         ty = touch[1]
         print(f"Handle Config Touches => X: {tx}, Y: {ty}")
         # Return index of state.modes[mode] + 2 (because we use 0,1 here)
-        if ty > 416 and ty < 480:
-            if tx > self.savFavButton.x and tx < self.savFavButton.x+(2*64):
-                print("Save to Faves Pressed")
-                return 2 + 1 # Handled and now its a drag.
-            if tx > self.okButton.x and tx < self.okButton.x+(2*64):
-                print("OK Pressed")
-                return 2 + 0 # Handled and now its a drag.
-            if tx > self.favButton.x and tx < self.favButton.x+64:
-                print("Select Faves Pressed")
-                return 2 + 2 # Handled and now its a drag.
+        if self.okButton.isTouched(tx,ty):
+            print("OK Pressed")
+            return 2 + 0 # Handled and now its a drag.
+        if self.savFavButton.isTouched(tx,ty):
+            print("Save to Faves Pressed")
+            return 2 + 1 # Handled and now its a drag.
+        if self.favButton.isTouched(tx,ty):
+            print("Select Faves Pressed")
+            return 2 + 2 # Handled and now its a drag.
 
         if self.configurators[1].handleTouch( touch, drag ) > 1:
             # handle settings request ch. 1
