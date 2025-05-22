@@ -72,7 +72,7 @@ displayio.release_displays()
 tft_pins = dict(board.TFT_PINS)
 
 board.I2C().deinit()
-i2c = busio.I2C(board.SCL, board.SDA, frequency=100_000)
+i2c = busio.I2C(board.SCL, board.SDA, frequency=400_000)
 tft_io_expander = dict(board.TFT_IO_EXPANDER)
 dotclockframebuffer.ioexpander_send_init_sequence(
     i2c, framebuffer.init_sequence_4x4_480, **tft_io_expander
