@@ -64,7 +64,7 @@ class CyclePage(Page):
         self.epochGlyph.x = 416
         self.epochGlyph.y = 416
         # Activated 'epoch'
-        self.epochButton = ImageButton(416,416,1,46, glyphs_img, glyphs_palette)
+        self.epochButton = ImageButton(416,416,1,48, glyphs_img, glyphs_palette)
         self.append(self.epochButton)
         self.epochButton.hidden = True
 
@@ -74,6 +74,8 @@ class CyclePage(Page):
         self.append(self.indicator.group)
         self.append(self.pauseButton)
         self.append(self.returnButton)
+
+        self.indicator.set_value(0)
 
 
 
@@ -176,7 +178,8 @@ class CyclePage(Page):
                 self.togglePause()
                 return 1 # Handled and now its a drag.
         if self.epochButton.isTouched(tx,ty):
-            print("epoch touched")
+            # print("epoch touched")
+            self.epochButton.hidden = not self.epochButton.hidden
             return 1
         if (self.dragChannel == 0 or self.dragChannel == 1) and self.sliders[0].handleTouch(touch, drag) > 0:
             self.dragChannel = 1
