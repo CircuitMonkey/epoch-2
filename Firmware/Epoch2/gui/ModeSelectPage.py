@@ -36,17 +36,17 @@ class ModeSelectPage(Page):
         ty = touch[1]
         print(f"Handle Mode Select Touches => X: {tx}, Y: {ty}")
         # Return index of state.modes[mode] + 2 (because we use 0,1 here)
-        if  ty >=128 and ty < 192:
-            if tx > self.manualButton.x and tx < self.manualButton.x+64:
-                return 2
-            elif tx > self.cycleButton.x and tx < self.cycleButton.x+64:
-                return 3
-            elif tx > self.pendulumButton.x and tx < self.pendulumButton.x+64:
-                return 4
-            elif tx > self.plungeButton.x and tx < self.plungeButton.x+64:
-                return 5
-            elif tx > self.pullButton.x and tx < self.pullButton.x+64:
-                return 6
+        if self.manualButton.isTouched(tx,ty):
+            return 2
+        if self.cycleButton.isTouched(tx,ty):
+            return 3
+        if self.pendulumButton.isTouched(tx,ty):
+            return 4
+        if self.plungeButton.isTouched(tx,ty):
+            return 5
+        if self.pullButton.isTouched(tx,ty):
+            return 6
+
         # print("Returning 0")
         return 0
 
