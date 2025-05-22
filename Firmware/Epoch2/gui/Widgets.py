@@ -244,7 +244,7 @@ class Slider(displayio.Group):
         tX = touch[0]
         tY = touch[1]
         # if no drag, save start point and begin drag
-        if drag < 1: # new drag
+        if not drag: # new drag
             print( "New Drag")
             sX = self.x
             sY = self.y + self.slider.y - 32
