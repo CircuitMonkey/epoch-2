@@ -31,7 +31,7 @@ class ModeSelectPage(Page):
         return
 
     def handleTouch( self, touch, drag ):
-        if drag > 0: return 1 # we don't handle drags
+        if drag: return 1 # we don't handle drags
         tx = touch[0] - self.x
         ty = touch[1]
         print(f"Handle Mode Select Touches => X: {tx}, Y: {ty}")
