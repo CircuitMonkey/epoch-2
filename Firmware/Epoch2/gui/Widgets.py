@@ -170,13 +170,13 @@ class Slider(displayio.Group):
 
         self.append(self.slider)
 
-        # TODO: Number
+        # Number
         self.number_text = Label(font, text="99", color=0x77EE77)
         self.number_text.anchor_point = (0.5, 0.5)
         self.number_text.anchored_position = (32, 280)
         self.append(self.number_text)
 
-        # TODO: Channel Values
+        # Channel Values
         self.motA = displayio.TileGrid(
             img, pixel_shader=img_palette,
             width=1, height=1,
