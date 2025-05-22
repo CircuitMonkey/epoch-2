@@ -23,21 +23,13 @@ class ConfigurePage(Page):
         self.okButton = TextButton(196, 400, 2, "OK", glyphs_img, glyphs_palette, font)
         self.favButton = ImageButton(400, 400, 1, 13, glyphs_img, glyphs_palette)
 
-        # self.append(self.conf1)
-        # self.append(self.conf2)
-        # self.append(self.conf3)
-        # self.append(self.conf4)
-        # self.append(self.conf5)
         self.append(self.savFavButton)
         self.append(self.okButton)
         self.append(self.favButton)
 
     def destroy():
-        self.remove(self.conf1)
-        self.remove(self.conf2)
-        self.remove(self.conf3)
-        self.remove(self.conf4)
-        self.remove(self.conf5)
+        for e in enumerate(self.configurators):
+            self.remove(e)
         self.remove(self.savFavButton)
         self.remove(self.okButton)
         self.remove(self.favButton)
