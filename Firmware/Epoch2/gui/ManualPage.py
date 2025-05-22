@@ -90,7 +90,7 @@ class ManualPage(Page):
             self.dragChannel = 0
 
     def handleTouch( self, touch, drag ):
-        if drag > 0 and self.dragChannel == 0:
+        if drag and self.dragChannel == 0:
             print("Nothing to drag")
             return 1 # nothing to drag
         txO = touch[0]

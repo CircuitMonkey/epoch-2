@@ -43,7 +43,7 @@ class ConfigurePage(Page):
         self.remove(self.favButton)
 
     def handleTouch(self, touch, drag):
-        if drag > 0: return 1 # we don't handle drags, yet
+        if drag: return 1 # we don't handle drags, yet
         tx = touch[0] - self.x
         ty = touch[1]
         print(f"Handle Config Touches => X: {tx}, Y: {ty}")

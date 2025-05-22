@@ -134,8 +134,8 @@ gt = gt911.GT911(i2c)
 
 
 # Main Loop
-drag = 0
 while True:
+drag = False
 
 #    start_time = time.monotonic()
 
@@ -143,7 +143,7 @@ while True:
         touches = gt.touches
         if len(touches) < 1:
             #print("No touches")
-            drag = 0
+            drag = False
             page.clearTouch()
         else:
             for touch in touches:
@@ -171,11 +171,13 @@ while True:
                     page = switchPage( state, glyphs_img, glyphs_palette, sm_font, font )
                     group.append(page)
                 display.refresh()
-                drag = 1
+                drag = True
                 time.sleep(0.05)
 
 
-        page.updateGUI()
+        if not drag:
+            page.updateGUI()
+
         display.refresh()
         page.updateMotors(motors)
 
