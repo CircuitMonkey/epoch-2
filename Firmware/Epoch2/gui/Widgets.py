@@ -29,6 +29,12 @@ class TextButton(displayio.Group):
         self.append(self.background)
         self.append(self.number_text)
 
+    def isTouched( self, tx,ty ):
+        if  ty >=self.y and ty < self.y + 64:
+            if tx > self.x and tx < self.x+self.background.width*64:
+                return True
+
+        return False
 
 
 class ImageButton(displayio.Group):
