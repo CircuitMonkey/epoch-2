@@ -6,11 +6,11 @@ class ModeSelectPage(Page):
     def __init__(self, state, glyphs_img, glyphs_palette):
         super().__init__()
         self.x = 48 # center on screen
-        self.manualButton = ImageButton(0,128,1,35, glyphs_img, glyphs_palette)
-        self.cycleButton = ImageButton(80,128,1,36, glyphs_img, glyphs_palette)
-        self.pendulumButton = ImageButton(160,128,1,37, glyphs_img, glyphs_palette)
-        self.plungeButton = ImageButton(240,128,1,38, glyphs_img, glyphs_palette)
-        self.pullButton = ImageButton(320,128,1,39, glyphs_img, glyphs_palette)
+        self.manualButton = ImageButton(0,128,1,1,35, glyphs_img, glyphs_palette)
+        self.cycleButton = ImageButton(80,128,1,1,36, glyphs_img, glyphs_palette)
+        self.pendulumButton = ImageButton(160,128,1,1,37, glyphs_img, glyphs_palette)
+        self.plungeButton = ImageButton(240,128,1,1,38, glyphs_img, glyphs_palette)
+        self.pullButton = ImageButton(320,128,1,1,39, glyphs_img, glyphs_palette)
 
         self.append(self.manualButton)
         self.append(self.cycleButton)
