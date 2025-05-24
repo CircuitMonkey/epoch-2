@@ -8,22 +8,13 @@ class ModeSelectPage(Page):
         self.x = 48 # center on screen
         self.manualButton = ImageButton(0,128,1,1,35, glyphs_img, glyphs_palette)
         self.cycleButton = ImageButton(80,128,1,1,36, glyphs_img, glyphs_palette)
-        self.pendulumButton = ImageButton(160,128,1,1,37, glyphs_img, glyphs_palette)
-        self.plungeButton = ImageButton(240,128,1,1,38, glyphs_img, glyphs_palette)
-        self.pullButton = ImageButton(320,128,1,1,39, glyphs_img, glyphs_palette)
 
         self.append(self.manualButton)
         self.append(self.cycleButton)
-        self.append(self.pendulumButton)
-        self.append(self.plungeButton)
-        self.append(self.pullButton)
 
     def destroy():
         self.remove(self.manualButton)
         self.remove(self.cycleButton)
-        self.remove(self.pendulumButton)
-        self.remove(self.plungeButton)
-        self.remove(self.pullButton)
 
     def updateMotors(self, motors):
         for ch in range(0,7):
@@ -40,12 +31,6 @@ class ModeSelectPage(Page):
             return 2
         if self.cycleButton.isTouched(tx,ty):
             return 3
-        if self.pendulumButton.isTouched(tx,ty):
-            return 4
-        if self.plungeButton.isTouched(tx,ty):
-            return 5
-        if self.pullButton.isTouched(tx,ty):
-            return 6
 
         # print("Returning 0")
         return 0

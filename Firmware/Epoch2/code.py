@@ -21,8 +21,7 @@ from adafruit_display_shapes.rect import Rect
 from adafruit_bitmap_font import bitmap_font
 from adafruit_display_text.label import Label
 from gui.ManualPage import *
-from gui.CyclePage import *
-from gui.PendulumPage import *
+from gui.CyclicModesPage import *
 from gui.ModeSelectPage import ModeSelectPage
 from gui.ConfigurePage import ConfigurePage
 from gui.ChannelSettingsPage import ChannelSettingsPage
@@ -45,9 +44,9 @@ def switchPage( st, img, img_palette, fontS, fontL ):
     elif ( st.mode == 2 ):
         pg = ManualPage(state, img, img_palette, fontS)
     elif ( st.mode == 3 ):
-        pg = CyclePage(state, img, img_palette, fontS)
-    elif ( st.mode == 4 ):
-        pg = PendulumPage(state, img, img_palette, fontS)
+        pg = CyclicModesPage(state, img, img_palette, fontS)
+    #elif ( st.mode == 4 ):
+    #    pg = PendulumPage(state, img, img_palette, fontS)
     # elif ( st.mode == 5 ):
     #     pg = PlungeMode(state, img, img_palette, fontS)
     # elif ( st.mode == 6 ):

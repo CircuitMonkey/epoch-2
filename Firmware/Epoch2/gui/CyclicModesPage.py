@@ -19,7 +19,7 @@ from gui.Widgets import Slider
 from gui.Widgets import Indicator
 from gui.Widgets import ImageButton
 
-class PendulumPage(Page):
+class CyclicModesPage(Page):
     def __init__(self, state, glyphs_img, glyphs_palette, font):
         super().__init__()
         self.state = state
