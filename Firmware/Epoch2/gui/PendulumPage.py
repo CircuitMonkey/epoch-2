@@ -48,29 +48,37 @@ class PendulumPage(Page):
             e.set_slider_value(state.mode_pendulum_slider[i])
             self.append(e)
 
-        # non-activated 'epoch' button
-        self.epochGlyph = displayio.TileGrid(
-            glyphs_img, pixel_shader=glyphs_palette,
-            width=1, height=1,
-            tile_width=64, tile_height=64
-        )
-        self.append(self.epochGlyph)
-        self.epochGlyph[0] = 48
-        self.epochGlyph.x = 416
-        self.epochGlyph.y = 416
-        # Activated 'epoch'
-        self.epochButton = ImageButton(416,416,1,48, glyphs_img, glyphs_palette)
+        # Epoch Button
+        self.epochButton = ImageButton(416,352,1,1,48, glyphs_img, glyphs_palette, canToggle=True)
         self.append(self.epochButton)
-        self.epochButton.hidden = True
+
+        # Hammer Button
+        self.hammerButton = ImageButton(416,416,1,1,42, glyphs_img, glyphs_palette, canToggle=True)
+        self.append(self.hammerButton)
 
         self.indicator = Indicator( 402, 64, glyphs_img, glyphs_palette, 33, font )
-        self.pauseButton = ImageButton(0,416,4,41, glyphs_img, glyphs_palette)
-        self.returnButton = ImageButton(416,0,1,6, glyphs_img, glyphs_palette)
+        self.pauseButton = ImageButton(0,352,2,2,41, glyphs_img, glyphs_palette)
+        self.returnButton = ImageButton(416,0,1,1,6, glyphs_img, glyphs_palette)
         self.append(self.indicator.group)
         self.append(self.pauseButton)
         self.append(self.returnButton)
 
         self.indicator.set_value(0)
+
+        # Modes
+        self.cycleButton = ImageButton(128,384,1,1,36, glyphs_img, glyphs_palette, canToggle=True)
+        self.pendulumButton = ImageButton(192,384,1,1,37, glyphs_img, glyphs_palette, canToggle=True)
+        self.plungeButton = ImageButton(256,384,1,1,38, glyphs_img, glyphs_palette, canToggle=True)
+        self.pullButton = ImageButton(320,384,1,1,39, glyphs_img, glyphs_palette, canToggle=True)
+        self.append(self.cycleButton)
+        self.append(self.pendulumButton)
+        self.append(self.plungeButton)
+        self.append(self.pullButton)
+
+        self.cycleButton.setToggled(True)
+        # TODO: Set the mode settings.
+
+
 
     def destroy(self):
         self.remove(self.sliders[0])
@@ -156,6 +164,34 @@ class PendulumPage(Page):
             self.pauseButton.glyph[0] = 40
         print(f"Pause Toggled: {str(self.state.pause)}")
 
+    def setModeCycle(self):
+            self.cycleButton.setToggled(True)
+            self.pendulumButton.setToggled(False)
+            self.plungeButton.setToggled(False)
+            self.pullButton.setToggled(False)
+            # TODO: Set Mode settings.
+
+    def setModePendulum(self):
+            self.cycleButton.setToggled(False)
+            self.pendulumButton.setToggled(True)
+            self.plungeButton.setToggled(False)
+            self.pullButton.setToggled(False)
+            # TODO: Set Mode settings.
+
+    def setModePlunge(self):
+            self.cycleButton.setToggled(False)
+            self.pendulumButton.setToggled(False)
+            self.plungeButton.setToggled(True)
+            self.pullButton.setToggled(False)
+            # TODO: Set Mode settings.
+
+    def setModePull(self):
+            self.cycleButton.setToggled(False)
+            self.pendulumButton.setToggled(False)
+            self.plungeButton.setToggled(False)
+            self.pullButton.setToggled(True)
+            # TODO: Set Mode settings.
+
     def clearTouch( self ):
         if self.dragChannel > 0:
             print( f"Touch ended on channel: {self.dragChannel}" )
@@ -177,7 +213,33 @@ class PendulumPage(Page):
                 return 1 # Handled and now its a drag.
         if self.epochButton.isTouched(tx,ty):
             # print("epoch touched")
-            self.epochButton.hidden = not self.epochButton.hidden
+            self.epochButton.setToggled(not self.epochButton.isToggled())
+            #self.epochButton.hidden = not self.epochButton.hidden
+            return 1
+        if self.hammerButton.isTouched(tx,ty):
+            # print("epoch touched")
+            self.hammerButton.setToggled(not self.hammerButton.isToggled())
+            #self.hammerButton.hidden = not self.hammerButton.hidden
+            return 1
+        if self.cycleButton.isTouched(tx,ty):
+            if self.cycleButton.isToggled():
+                return 1
+            self.setModeCycle()
+            return 1
+        if self.pendulumButton.isTouched(tx,ty):
+            if self.pendulumButton.isToggled():
+                return 1
+            self.setModePendulum()
+            return 1
+        if self.plungeButton.isTouched(tx,ty):
+            if self.plungeButton.isToggled():
+                return 1
+            self.setModePlunge()
+            return 1
+        if self.pullButton.isTouched(tx,ty):
+            if self.pullButton.isToggled():
+                return 1
+            self.setModePull()
             return 1
         if (self.dragChannel == 0 or self.dragChannel == 1) and self.sliders[0].handleTouch(touch, drag) > 0:
             self.dragChannel = 1
