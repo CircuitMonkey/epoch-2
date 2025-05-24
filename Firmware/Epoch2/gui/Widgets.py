@@ -3,28 +3,28 @@ import displayio
 from adafruit_display_text.label import Label
 
 class TextButton(displayio.Group):
-    def __init__(self, x, y, size, text, img, img_palette, font):
+    def __init__(self, x, y, w, h, text, img, img_palette, font):
         super().__init__()
         self.x = x
         self.y = y
 
         self.background = displayio.TileGrid(
             img, pixel_shader=img_palette,
-            width=size, height=1,
+            width=w, height=1,
             tile_width=64, tile_height=64
         )
-        if size == 1:
+        if w == 1:
             self.background[0] = 1
         else:
             self.background[0] = 2
-            if size > 2:
-                for i in range(size-2):
+            if w > 2:
+                for i in range(w-2):
                     self.background[i+1] = 3
-            self.background[size-1] = 4
+            self.background[w-1] = 4
 
         self.number_text = Label(font, text=text, color=0xEEEEEE)
         self.number_text.anchor_point = (0.5, 0.5)
-        self.number_text.anchored_position = (size*32, 32)
+        self.number_text.anchored_position = (w*32, 32)
 
         self.append(self.background)
         self.append(self.number_text)
@@ -38,23 +38,47 @@ class TextButton(displayio.Group):
 
 
 class ImageButton(displayio.Group):
-    def __init__(self, x, y, size, glyph, img, img_palette):
+    def __init__(self, x, y, w, h, glyph, img, img_palette, canToggle=False):
         super().__init__()
         self.x = x
         self.y = y
         self.background = displayio.TileGrid(
             img, pixel_shader=img_palette,
-            width=size, height=1,
+            width=w, height=h,
             tile_width=64, tile_height=64
         )
-        if size == 1:
+        self.canToggle = canToggle
+
+        if w == 1 and h == 1:
             self.background[0] = 1
-        else:
+        elif h == 1:  # single row button
             self.background[0] = 2
-            if size > 2:
-                for i in range(size-2):
+            if w > 2:
+                for i in range(w-2):
                     self.background[i+1] = 3
-            self.background[size-1] = 4
+            self.background[w-1] = 4
+        else: # multi row button ( 2 or more wide )
+            self.background[0] = 9
+            # Top row of large button
+            if w > 2:
+                for i in range(w-2):
+                    self.background[i+1] = 10
+            self.background[w-1] = 11
+            '''
+            # middle rows of large button
+            if w > 2 and h > 2:
+                for row in range(1,h-2,1):
+                    self.background[row*w] = 16
+                    for i in range(w-2):
+                        self.background[(row*w)+i+1] = 17
+                    self.background[(row*w)+ w] = 18
+            '''
+            # bottom row of large button
+            self.background[w*(h-1)] = 23
+            if w > 2:
+                for i in range(w-2):
+                    self.background[i+1] = 24
+            self.background[w*h - 1] = 25
 
         self.glyph = displayio.TileGrid(
             img, pixel_shader=img_palette,
@@ -63,12 +87,15 @@ class ImageButton(displayio.Group):
         )
         # Glyph for moveable element
         self.glyph[0] = glyph
-        self.glyph.x = size*32 - 32
-        self.glyph.y = 0
+        self.glyph.x = w*32 - 32
+        self.glyph.y = h*32 - 32
 
 
         self.append(self.background)
         self.append(self.glyph)
+        # always on if can't toggle.
+        # shows as not-toggled (off) default when toggle is allowed.
+        self.setToggled(not canToggle)
 
     def isTouched( self, tx,ty ):
         if  ty >=self.y and ty < self.y + 64:
@@ -77,6 +104,14 @@ class ImageButton(displayio.Group):
 
         return False
 
+    def setToggled( self, visible ):
+        if self.canToggle:
+            self.background.hidden = not visible
+        else:
+            print("WARN: Tried to toggle non-toggleble button.")
+
+    def isToggled(self):
+        return not self.background.hidden
 
 class Indicator:
     def __init__(self, gx, gy, img, img_palette, glyph, font):
@@ -110,7 +145,7 @@ class Indicator:
         # TODO: Number
         self.number_text = Label(font, text="99", color=0x77EE77)
         self.number_text.anchor_point = (0.5, 0.5)
-        self.number_text.anchored_position = (32, 280)
+        self.number_text.anchored_position = (32, 270)
         self.group.append(self.number_text)
         # TODO: Channel Values
 
@@ -173,7 +208,7 @@ class Slider(displayio.Group):
         # Number
         self.number_text = Label(font, text="99", color=0x77EE77)
         self.number_text.anchor_point = (0.5, 0.5)
-        self.number_text.anchored_position = (32, 280)
+        self.number_text.anchored_position = (32, 270)
         self.append(self.number_text)
 
         # Channel Values
