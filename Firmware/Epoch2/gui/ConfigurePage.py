@@ -19,9 +19,9 @@ class ConfigurePage(Page):
         for i, e in enumerate(self.configurators):
             self.append(e)
 
-        self.savFavButton = ImageButton(0, 400, 2, 12, glyphs_img, glyphs_palette)
-        self.okButton = TextButton(196, 400, 2, "OK", glyphs_img, glyphs_palette, font)
-        self.favButton = ImageButton(400, 400, 1, 13, glyphs_img, glyphs_palette)
+        self.savFavButton = ImageButton(0, 400, 2, 1, 12, glyphs_img, glyphs_palette)
+        self.okButton = TextButton(196, 400, 2, 1, "OK", glyphs_img, glyphs_palette, font)
+        self.favButton = ImageButton(400, 400, 1, 1, 13, glyphs_img, glyphs_palette)
 
         self.append(self.savFavButton)
         self.append(self.okButton)
