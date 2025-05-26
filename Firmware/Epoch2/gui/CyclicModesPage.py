@@ -25,14 +25,14 @@ class CyclicModesPage(Page):
         self.dragChannel = 0
         self.state.pause = True
 
-        self.SOFT_ENV = [ 10, 20,60,99,99,60,20, 10 ]
+        self.SOFT_ENV = [ 0, 0, 0, 40,70,99,99,70,40, 0, 0, 0 ]
         self.HARD_ENV = [ 0, 0,0,99,99,0,0, 0 ] # Hammer Time!
-        self.PPP_TICK = [-3,-3,1,1,5,5,9,9] # Push, Pull, Pendulum
+        self.PPP_TICK = [-2,-2,0,0,3,3,7,7] # Push, Pull, Pendulum
         self.CYC_TICK = [0,18,3,15,5,13,8,10] # negative envelope offset of 8 channels
 
         self.tick = 0
         self.tickDir = 1
-        self.tickMax = 12
+        self.tickMax = 16
         self.dwell = 0
         self.dwellMult = 0.5
         self.envelope = self.SOFT_ENV
@@ -264,8 +264,12 @@ class CyclicModesPage(Page):
             self.hammerButton.setToggled(not self.hammerButton.isToggled())
             if self.hammerButton.isToggled():
                 self.envelope = self.HARD_ENV
+                self.envLen = len(self.envelope)
+
             else:
                 self.envelope = self.SOFT_ENV
+                self.envLen = len(self.envelope)
+
 
 
             #self.hammerButton.hidden = not self.hammerButton.hidden
