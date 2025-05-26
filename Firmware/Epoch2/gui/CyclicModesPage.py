@@ -1,15 +1,14 @@
-#   Pendulum Mode for Epoch 2 Vibrator Controller
+#   Cyclic Modes for Epoch 2 Vibrator Controller
 #   https://github.com/CircuitMonkey/epoch-2
 #
 #   by Mark J. Koch (@maehem on GitHub) - c2025
 #
 #   Provided under MIT license.
 #
-#   This mode activates pairs of vibrators briefly in a
-#   pendulum pattern.  The sensation would be that of
-#   a plunge and then pull until all motors have been activated.
-#   After some delay/dwell, using a slider, the pendulum repeats.
-#   The pendulum speed/rate is controlled using a slider.
+#   These modes activate pairs of vibrators briefly in a selected
+#   pattern (Cycle,Pendulum,Plunge or Pull).
+#   After some delay/dwell, using a slider, the mode repeats.
+#   The speed/rate is controlled using a slider.
 #
 
 
@@ -26,14 +25,20 @@ class CyclicModesPage(Page):
         self.dragChannel = 0
         self.state.pause = True
 
+        self.SOFT_ENV = [ 10, 20,60,99,99,60,20, 10 ]
+        self.HARD_ENV = [ 0, 0,0,99,99,0,0 0 ] # Hammer Time!
+        self.PPP_TICK = [-3,-3,1,1,5,5,9,9] # Push, Pull, Pendulum
+        self.CYC_TICK = [0,18,3,15,5,13,8,10] # negative envelope offset of 8 channels
+
         self.tick = 0
         self.tickDir = 1
         self.tickMax = 12
         self.dwell = 0
         self.dwellMult = 0.5
-        self.envelope = [ 10, 20,60,99,99,60,20, 10 ]
+        self.envelope = self.SOFT_ENV
         self.envLen = len(self.envelope)
-        self.tickOffset = [-3,-3,1,1,5,5,9,9]
+        self.tickOffset = self.CYC_TICK
+        self.currentMotors = self.state.mode_cycle_motors
 
         self.sliders = [
             Slider( 0, 64, glyphs_img, glyphs_palette, 28, font ),
@@ -44,6 +49,7 @@ class CyclicModesPage(Page):
             Slider( 320, 64, glyphs_img, glyphs_palette, 47, font ),
         ]
 
+        # TODO use cyc method.
         for i, e in enumerate(self.sliders):
             e.set_slider_value(state.mode_pendulum_slider[i])
             self.append(e)
@@ -78,8 +84,6 @@ class CyclicModesPage(Page):
         self.cycleButton.setToggled(True)
         # TODO: Set the mode settings.
 
-
-
     def destroy(self):
         self.remove(self.sliders[0])
         self.remove(self.sliders[1])
@@ -105,14 +109,24 @@ class CyclicModesPage(Page):
                 self.tick += self.sliders[4].value/99.0 * self.tickDir
                 self.dwell = 0
 
-        if self.tick > self.tickMax:
-            self.tick = self.tickMax
-            self.tickDir = -self.tickDir
-            self.dwell = self.sliders[5].value * self.dwellMult
-        elif self.tick < 0:
-            self.tick = 0
-            self.tickDir = -self.tickDir
-            self.dwell = self.sliders[5].value * self.dwellMult
+        if cycleButton.isToggled() or pendulumButton.isToggled: #up/down
+            if self.tick > self.tickMax:
+                self.tick = self.tickMax
+                self.tickDir = -self.tickDir
+                self.dwell = self.sliders[5].value * self.dwellMult
+            elif self.tick < 0:
+                self.tick = 0
+                self.tickDir = -self.tickDir
+                self.dwell = self.sliders[5].value * self.dwellMult
+        else: # one-direction (plunge and pull)
+            if self.tick > self.tickMax:
+                self.tick = 0
+                #self.tickDir = -self.tickDir
+                self.dwell = self.sliders[5].value * self.dwellMult
+            elif self.tick < 0:
+                self.tick = self.tickMax
+                #self.tickDir = -self.tickDir
+                self.dwell = self.sliders[5].value * self.dwellMult
 
         for ch in range(8):
             idx = int(self.tick) - self.tickOffset[ch]
@@ -124,25 +138,12 @@ class CyclicModesPage(Page):
             else:
                 motVal = 0
 
-            self.state.mode_pendulum_motors[ch] = motVal
+            self.currentMotors[ch] = motVal
 
         for sld in range(4):
             mtr = sld*2
-            self.state.mode_pendulum_motors[sld*2] = int(self.sliders[sld].value * self.state.mode_pendulum_motors[sld*2] / 99)
-            self.state.mode_pendulum_motors[sld*2+1] = int(self.sliders[sld].value * self.state.mode_pendulum_motors[sld*2+1] / 99)
-
-        # todo: Move into loop above
-        # Update slider motor indicator based on slider settings and tick.
-        self.sliders[0].set_channel_a_value(self.state.mode_pendulum_motors[0])
-        self.sliders[0].set_channel_b_value(self.state.mode_pendulum_motors[1])
-        self.sliders[1].set_channel_a_value(self.state.mode_pendulum_motors[2])
-        self.sliders[1].set_channel_b_value(self.state.mode_pendulum_motors[3])
-        self.sliders[2].set_channel_a_value(self.state.mode_pendulum_motors[4])
-        self.sliders[2].set_channel_b_value(self.state.mode_pendulum_motors[5])
-
-        # Wand
-        self.sliders[3].set_channel_a_value(self.state.mode_pendulum_motors[6])
-        self.sliders[3].set_channel_b_value(self.state.mode_pendulum_motors[7])
+            self.currentMotors[sld*2] = int(self.sliders[sld].value * self.currentMotors[sld*2] / 99)
+            self.currentMotors[sld*2+1] = int(self.sliders[sld].value * self.currentMotors[sld*2+1] / 99)
 
         return
 
@@ -152,7 +153,7 @@ class CyclicModesPage(Page):
                 motors.setMotor(ch, 0)
         else:
             for ch in range(16):
-                motors.setMotor(ch, self.state.mode_pendulum_motors[ch])
+                motors.setMotor(ch, self.currentMotors[ch])
 
         return
 
@@ -170,6 +171,15 @@ class CyclicModesPage(Page):
             self.plungeButton.setToggled(False)
             self.pullButton.setToggled(False)
             # TODO: Set Mode settings.
+            for i, e in enumerate(self.sliders):
+                e.set_slider_value(state.mode_cycle_slider[i])
+                self.append(e)
+
+            self.currentMotors = self.state.mode_cycle_motors
+            self.tick = 0
+            self.tickDir = 1
+            self.tickOffset = self.CYC_TICK
+
 
     def setModePendulum(self):
             self.cycleButton.setToggled(False)
@@ -177,6 +187,14 @@ class CyclicModesPage(Page):
             self.plungeButton.setToggled(False)
             self.pullButton.setToggled(False)
             # TODO: Set Mode settings.
+            for i, e in enumerate(self.sliders):
+                e.set_slider_value(state.mode_pendulum_slider[i])
+                self.append(e)
+
+            self.currentMotors = self.state.mode_pendulum_motors
+            self.tick = 0
+            self.tickDir = 1
+            self.tickOffset = self.PPP_TICK
 
     def setModePlunge(self):
             self.cycleButton.setToggled(False)
@@ -184,6 +202,14 @@ class CyclicModesPage(Page):
             self.plungeButton.setToggled(True)
             self.pullButton.setToggled(False)
             # TODO: Set Mode settings.
+            for i, e in enumerate(self.sliders):
+                e.set_slider_value(state.mode_plunge_slider[i])
+                self.append(e)
+
+            self.currentMotors = self.state.mode_plunge_motors
+            self.tick = 0
+            self.tickDir = 1
+            self.tickOffset = self.PPP_TICK
 
     def setModePull(self):
             self.cycleButton.setToggled(False)
@@ -191,6 +217,14 @@ class CyclicModesPage(Page):
             self.plungeButton.setToggled(False)
             self.pullButton.setToggled(True)
             # TODO: Set Mode settings.
+            for i, e in enumerate(self.sliders):
+                e.set_slider_value(state.mode_pull_slider[i])
+                self.append(e)
+
+            self.currentMotors = self.state.mode_pull_motors
+            self.tick = self.tickMax
+            self.tickDir = -1
+            self.tickOffset = self.PPP_TICK
 
     def clearTouch( self ):
         if self.dragChannel > 0:
@@ -219,6 +253,12 @@ class CyclicModesPage(Page):
         if self.hammerButton.isTouched(tx,ty):
             # print("epoch touched")
             self.hammerButton.setToggled(not self.hammerButton.isToggled())
+            if self.hammerButton.isToggled():
+                self.envelope = self.HARD_ENV
+            else:
+                self.envelope = self.SOFT_ENV
+
+
             #self.hammerButton.hidden = not self.hammerButton.hidden
             return 1
         if self.cycleButton.isTouched(tx,ty):
