@@ -26,7 +26,7 @@ class CyclicModesPage(Page):
         self.state.pause = True
 
         self.SOFT_ENV = [ 10, 20,60,99,99,60,20, 10 ]
-        self.HARD_ENV = [ 0, 0,0,99,99,0,0 0 ] # Hammer Time!
+        self.HARD_ENV = [ 0, 0,0,99,99,0,0, 0 ] # Hammer Time!
         self.PPP_TICK = [-3,-3,1,1,5,5,9,9] # Push, Pull, Pendulum
         self.CYC_TICK = [0,18,3,15,5,13,8,10] # negative envelope offset of 8 channels
 
@@ -39,6 +39,7 @@ class CyclicModesPage(Page):
         self.envLen = len(self.envelope)
         self.tickOffset = self.CYC_TICK
         self.currentMotors = self.state.mode_cycle_motors
+        self.currentSliderVals = self.state.mode_cycle_slider
 
         self.sliders = [
             Slider( 0, 64, glyphs_img, glyphs_palette, 28, font ),
@@ -51,7 +52,7 @@ class CyclicModesPage(Page):
 
         # TODO use cyc method.
         for i, e in enumerate(self.sliders):
-            e.set_slider_value(state.mode_pendulum_slider[i])
+            e.set_slider_value(self.currentSliderVals[i])
             self.append(e)
 
         # Epoch Button
@@ -109,7 +110,7 @@ class CyclicModesPage(Page):
                 self.tick += self.sliders[4].value/99.0 * self.tickDir
                 self.dwell = 0
 
-        if cycleButton.isToggled() or pendulumButton.isToggled: #up/down
+        if self.cycleButton.isToggled() or self.pendulumButton.isToggled(): #up/down
             if self.tick > self.tickMax:
                 self.tick = self.tickMax
                 self.tickDir = -self.tickDir
@@ -170,10 +171,12 @@ class CyclicModesPage(Page):
             self.pendulumButton.setToggled(False)
             self.plungeButton.setToggled(False)
             self.pullButton.setToggled(False)
+            self.currentSliderVals = self.state.mode_cycle_slider
+
             # TODO: Set Mode settings.
             for i, e in enumerate(self.sliders):
-                e.set_slider_value(state.mode_cycle_slider[i])
-                self.append(e)
+                e.set_slider_value(self.currentSliderVals[i])
+                #self.append(e)
 
             self.currentMotors = self.state.mode_cycle_motors
             self.tick = 0
@@ -186,10 +189,12 @@ class CyclicModesPage(Page):
             self.pendulumButton.setToggled(True)
             self.plungeButton.setToggled(False)
             self.pullButton.setToggled(False)
+            self.currentSliderVals = self.state.mode_pendulum_slider
+
             # TODO: Set Mode settings.
             for i, e in enumerate(self.sliders):
-                e.set_slider_value(state.mode_pendulum_slider[i])
-                self.append(e)
+                e.set_slider_value(self.currentSliderVals[i])
+                #self.append(e)
 
             self.currentMotors = self.state.mode_pendulum_motors
             self.tick = 0
@@ -201,10 +206,12 @@ class CyclicModesPage(Page):
             self.pendulumButton.setToggled(False)
             self.plungeButton.setToggled(True)
             self.pullButton.setToggled(False)
+            self.currentSliderVals = self.state.mode_plunge_slider
+
             # TODO: Set Mode settings.
             for i, e in enumerate(self.sliders):
-                e.set_slider_value(state.mode_plunge_slider[i])
-                self.append(e)
+                e.set_slider_value(self.currentSliderVals[i])
+                #self.append(e)
 
             self.currentMotors = self.state.mode_plunge_motors
             self.tick = 0
@@ -216,10 +223,12 @@ class CyclicModesPage(Page):
             self.pendulumButton.setToggled(False)
             self.plungeButton.setToggled(False)
             self.pullButton.setToggled(True)
+            self.currentSliderVals = self.state.mode_pull_slider
+
             # TODO: Set Mode settings.
             for i, e in enumerate(self.sliders):
-                e.set_slider_value(state.mode_pull_slider[i])
-                self.append(e)
+                e.set_slider_value(self.currentSliderVals[i])
+                #self.append(e)
 
             self.currentMotors = self.state.mode_pull_motors
             self.tick = self.tickMax
@@ -283,33 +292,33 @@ class CyclicModesPage(Page):
             return 1
         if (self.dragChannel == 0 or self.dragChannel == 1) and self.sliders[0].handleTouch(touch, drag) > 0:
             self.dragChannel = 1
-            self.state.mode_pendulum_slider[self.dragChannel-1] = self.sliders[self.dragChannel-1].value
+            self.currentSliderVals[self.dragChannel-1] = self.sliders[self.dragChannel-1].value
             # print( f"drag slider {self.dragChannel}" )
             return 1
         if (self.dragChannel == 0 or self.dragChannel == 2) and self.sliders[1].handleTouch(touch, drag) > 0:
             self.dragChannel = 2
-            self.state.mode_pendulum_slider[self.dragChannel-1] = self.sliders[self.dragChannel-1].value
+            self.currentSliderVals[self.dragChannel-1] = self.sliders[self.dragChannel-1].value
             # print( f"drag slider {self.dragChannel}" )
             return 1
         if (self.dragChannel == 0 or self.dragChannel == 3) and self.sliders[2].handleTouch(touch, drag) > 0:
             self.dragChannel = 3
-            self.state.mode_pendulum_slider[self.dragChannel-1] = self.sliders[self.dragChannel-1].value
+            self.currentSliderVals[self.dragChannel-1] = self.sliders[self.dragChannel-1].value
             # print( f"drag slider {self.dragChannel}" )
             return 1
         if (self.dragChannel == 0 or self.dragChannel == 4) and self.sliders[3].handleTouch(touch, drag) > 0:
             self.dragChannel = 4
-            self.state.mode_pendulum_slider[self.dragChannel-1] = self.sliders[self.dragChannel-1].value
+            self.currentSliderVals[self.dragChannel-1] = self.sliders[self.dragChannel-1].value
             # print( f"drag slider {self.dragChannel}" )
             return 1
         if (self.dragChannel == 0 or self.dragChannel == 5) and self.sliders[4].handleTouch(touch, drag) > 0:
             self.dragChannel = 5
             # TODO: there are actually 10 sliders ch 1-4 and ch5-8 and then delay and speed.
-            self.state.mode_pendulum_slider[self.dragChannel-1] = self.sliders[self.dragChannel-1].value
+            self.currentSliderVals[self.dragChannel-1] = self.sliders[self.dragChannel-1].value
             # print( f"drag slider {self.dragChannel}" )
             return 1
         if (self.dragChannel == 0 or self.dragChannel == 6) and self.sliders[5].handleTouch(touch, drag) > 0:
             self.dragChannel = 6
-            self.state.mode_pendulum_slider[self.dragChannel-1] = self.sliders[self.dragChannel-1].value
+            self.currentSliderVals[self.dragChannel-1] = self.sliders[self.dragChannel-1].value
             # print( f"drag slider {self.dragChannel}" )
             return 1
 
