@@ -32,6 +32,12 @@ mode_cycle_motors = [0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0] # ch1-16
 mode_pendulum_slider = [50,50,50,50, 50,20] # groups 1..4 + spd + dwell
 mode_pendulum_motors = [0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0] # ch1-16
 
+mode_plunge_slider = [50,50,50,50, 50,20] # groups 1..4 + spd + dwell
+mode_plunge_motors = [0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0] # ch1-16
+
+mode_pull_slider = [50,50,50,50, 50,20] # groups 1..4 + spd + dwell
+mode_pull_motors = [0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0] # ch1-16
+
 paused = True
 
 modes = [
