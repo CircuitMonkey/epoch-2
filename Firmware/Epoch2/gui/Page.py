@@ -12,7 +12,7 @@ class Page(displayio.Group):
 
         return 1
 
-    def updateGUI(self):
+    def updateGUI(self, sensor):  # sensor 0-99
         return
 
     def updateMotors(self, motors):
