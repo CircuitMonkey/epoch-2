@@ -139,10 +139,17 @@ gt = gt911.GT911(i2c)
 
 # Main Loop
 drag = False
+sensorCounter = 0
+sensorValue = sensor.read()
 
 while True:
 
     try:
+        sensorCounter -= 1
+        if sensorCounter < 0:
+            sensorValue = sensor.read()
+            sensorCounter = 5
+
         touches = gt.touches
         if len(touches) < 1:
             #print("No touches")
@@ -180,7 +187,7 @@ while True:
 
 
         if not drag:
-            page.updateGUI( sensor.read() )
+            page.updateGUI( sensorValue )
 
         #start_time = time.monotonic()
         display.refresh()
