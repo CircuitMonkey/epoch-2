@@ -48,9 +48,11 @@ class ManualPage(Page):
         self.remove(self.returnButton)
 
 
-    def updateGUI(self):
+    def updateGUI(self, sensor):
         # print("Update GUI")
         # Update sensor value ==> indicator
+        self.indicator.set_value(sensor)
+
         # Update motor output values. ==> sliders
         return
 

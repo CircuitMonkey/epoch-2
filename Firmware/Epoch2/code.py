@@ -30,6 +30,7 @@ from Motors import *
 import framebuffer
 import state
 import time
+from Hx710b import *
 
 # import supervisor
 # supervisor.runtime.autoreload = False
@@ -76,6 +77,9 @@ tft_io_expander = dict(board.TFT_IO_EXPANDER)
 dotclockframebuffer.ioexpander_send_init_sequence(
     i2c, framebuffer.init_sequence_4x4_480, **tft_io_expander
 )
+
+# Sensor
+sensor = Hx710b( board.A1, board.A0) # CLK, DAT
 
 # Vibe motors
 motors = Motors(i2c)
@@ -176,7 +180,7 @@ while True:
 
 
         if not drag:
-            page.updateGUI()
+            page.updateGUI( sensor.read() )
 
         #start_time = time.monotonic()
         display.refresh()

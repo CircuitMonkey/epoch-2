@@ -97,9 +97,10 @@ class CyclicModesPage(Page):
         self.remove(self.returnButton)
 
 
-    def updateGUI(self):
+    def updateGUI(self, sensor):
         # print("Update GUI")
         # Update sensor value ==> indicator
+        self.indicator.set_value(sensor)
 
         # Calculate state.motor values
         # Update Tick
