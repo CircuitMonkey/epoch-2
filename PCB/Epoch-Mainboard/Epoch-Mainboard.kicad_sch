@@ -4274,6 +4274,15 @@
 				(hide yes)
 			)
 		)
+		(property "Sim.Device" ""
+			(at 168.91 34.29 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "fa3d04e6-2645-4ed4-8f7e-634e696389f4")
 		)
@@ -4334,6 +4343,15 @@
 		)
 		(property "Description" "Resistor, small symbol"
 			(at 146.05 67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Device" ""
+			(at 146.05 67.31 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4607,6 +4625,15 @@
 				(hide yes)
 			)
 		)
+		(property "Sim.Device" ""
+			(at 111.76 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "1d269d4f-bb69-48e3-919a-6c7b341661ac")
 		)
@@ -4667,6 +4694,15 @@
 		)
 		(property "Description" "Resistor, small symbol"
 			(at 168.91 64.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Device" ""
+			(at 168.91 64.77 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4744,6 +4780,15 @@
 				(hide yes)
 			)
 		)
+		(property "Sim.Device" ""
+			(at 140.97 110.49 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "e8e8dfe2-c9b5-48db-829d-280c2fcdb862")
 		)
@@ -4804,6 +4849,15 @@
 		)
 		(property "Description" "Resistor, small symbol"
 			(at 146.05 62.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Device" ""
+			(at 146.05 62.23 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4878,6 +4932,15 @@
 				(hide yes)
 			)
 		)
+		(property "Sim.Device" ""
+			(at 146.05 39.37 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "6b7cb741-49e0-4453-ab7d-54b8b30c576f")
 		)
@@ -4938,6 +5001,15 @@
 		)
 		(property "Description" "Resistor, small symbol"
 			(at 143.51 44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Device" ""
+			(at 143.51 44.45 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5012,6 +5084,15 @@
 				(hide yes)
 			)
 		)
+		(property "Sim.Device" ""
+			(at 182.88 125.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "e3ae937b-06cd-4ad9-8b2a-b28bf902fe72")
 		)
@@ -5077,6 +5158,15 @@
 			)
 		)
 		(property "Description" "Resistor, small symbol"
+			(at 118.11 132.08 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Device" ""
 			(at 118.11 132.08 0)
 			(effects
 				(font
@@ -5286,6 +5376,15 @@
 				(hide yes)
 			)
 		)
+		(property "Sim.Device" ""
+			(at 149.86 130.81 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "f70eaefe-c085-489c-9f34-8e355a1280b5")
 		)
@@ -5346,6 +5445,15 @@
 		)
 		(property "Description" "Resistor, small symbol"
 			(at 146.05 34.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Device" ""
+			(at 146.05 34.29 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5415,6 +5523,15 @@
 			)
 		)
 		(property "Description" "Resistor, small symbol"
+			(at 74.93 44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Device" ""
 			(at 74.93 44.45 0)
 			(effects
 				(font
@@ -5633,6 +5750,15 @@
 				(hide yes)
 			)
 		)
+		(property "Sim.Device" ""
+			(at 140.97 116.84 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "5e12d0bc-87c7-476f-8119-a536236e20d7")
 		)
@@ -5695,6 +5821,15 @@
 			)
 		)
 		(property "Description" "16-channel 12-bit PWM Fm+ I2C-bus LED controller RGBA TSSOP"
+			(at 92.71 52.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Device" ""
 			(at 92.71 52.07 0)
 			(effects
 				(font
@@ -5907,6 +6042,15 @@
 		)
 		(property "Description" "Resistor, small symbol"
 			(at 143.51 69.85 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Device" ""
+			(at 143.51 69.85 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6182,6 +6326,15 @@
 				(hide yes)
 			)
 		)
+		(property "Sim.Device" ""
+			(at 54.61 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "33b03cf0-9229-4e51-9cd9-64898abcf146")
 		)
@@ -6384,6 +6537,15 @@
 				(hide yes)
 			)
 		)
+		(property "Sim.Device" ""
+			(at 64.77 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "1732b843-861b-4339-981b-2a3f2025fcfe")
 		)
@@ -6446,6 +6608,15 @@
 			)
 		)
 		(property "Description" "Resistor, small symbol"
+			(at 69.85 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Device" ""
 			(at 69.85 72.39 0)
 			(effects
 				(font
@@ -6525,6 +6696,15 @@
 		)
 		(property "Sim.Pins" "1=K 2=A"
 			(at 140.97 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Device" ""
+			(at 140.97 133.35 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -6664,6 +6844,15 @@
 				(hide yes)
 			)
 		)
+		(property "Sim.Device" ""
+			(at 168.91 39.37 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "8303a0d7-7662-4241-b29c-e749b7fb7c82")
 		)
@@ -6729,6 +6918,15 @@
 			)
 		)
 		(property "Description" "Single cell, Li-Ion/Li-Po charge management controller, 4.40V, Tri-State Status Output, in SOT23-5 package"
+			(at 129.54 127 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Device" ""
 			(at 129.54 127 0)
 			(effects
 				(font
@@ -6815,6 +7013,15 @@
 				(hide yes)
 			)
 		)
+		(property "Sim.Device" ""
+			(at 109.22 118.11 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "80fbd314-6ca9-4c3d-8da6-a4ee66c0e23e")
 		)
@@ -6877,6 +7084,15 @@
 			)
 		)
 		(property "Description" "Resistor, small symbol"
+			(at 44.45 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Device" ""
 			(at 44.45 72.39 0)
 			(effects
 				(font
@@ -6955,6 +7171,15 @@
 				(hide yes)
 			)
 		)
+		(property "Sim.Device" ""
+			(at 49.53 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "0abd48e1-d9ce-43cd-85d7-1f233a4b1255")
 		)
@@ -7015,6 +7240,15 @@
 		)
 		(property "Description" "Resistor, small symbol"
 			(at 146.05 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Device" ""
+			(at 146.05 59.69 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7092,6 +7326,15 @@
 				(hide yes)
 			)
 		)
+		(property "Sim.Device" ""
+			(at 59.69 36.83 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "1f5e435a-fdf7-4eb3-bb14-3a035d2e194b")
 		)
@@ -7152,6 +7395,15 @@
 		)
 		(property "Description" "Solder Pad"
 			(at 59.69 41.91 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Device" ""
+			(at 59.69 41.91 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7281,6 +7533,15 @@
 			)
 		)
 		(property "Description" "Generic connector, double row, 02x06, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(at 154.94 39.37 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Device" ""
 			(at 154.94 39.37 0)
 			(effects
 				(font
@@ -7514,6 +7775,15 @@
 		)
 		(property "Description" "Solder pad"
 			(at 59.69 30.48 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Device" ""
+			(at 59.69 30.48 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7849,6 +8119,15 @@
 				(hide yes)
 			)
 		)
+		(property "Sim.Device" ""
+			(at 168.91 36.83 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "bd3c4307-c5c8-43b3-9986-d5fff2119f00")
 		)
@@ -7984,6 +8263,15 @@
 				(hide yes)
 			)
 		)
+		(property "Sim.Device" ""
+			(at 165.1 124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "c90f9db7-c48c-4c47-a656-602ccb167574")
 		)
@@ -8051,6 +8339,15 @@
 				(hide yes)
 			)
 		)
+		(property "Sim.Device" ""
+			(at 146.05 41.91 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "ffd1994e-0b30-4281-be90-6ca86b111c0e")
 		)
@@ -8110,6 +8407,15 @@
 			)
 		)
 		(property "Description" "Generic connector, double row, 02x06, odd/even pin numbering scheme (row 1 odd numbers, row 2 even numbers), script generated (kicad-library-utils/schlib/autogen/connector/)"
+			(at 154.94 64.77 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Device" ""
 			(at 154.94 64.77 0)
 			(effects
 				(font
@@ -8218,6 +8524,15 @@
 				(hide yes)
 			)
 		)
+		(property "Sim.Device" ""
+			(at 59.69 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "014720ae-1127-4aa7-9486-574f6aeaad62")
 		)
@@ -8285,6 +8600,15 @@
 				(hide yes)
 			)
 		)
+		(property "Sim.Device" ""
+			(at 146.05 36.83 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "41d86c55-76f0-4e3a-b2f9-959e15ac26b6")
 		)
@@ -8345,6 +8669,15 @@
 		)
 		(property "Description" "Resistor, small symbol"
 			(at 168.91 67.31 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Device" ""
+			(at 168.91 67.31 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8617,6 +8950,15 @@
 				(hide yes)
 			)
 		)
+		(property "Sim.Device" ""
+			(at 146.05 64.77 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "d8d0d799-570c-4329-92b8-796016b5fff0")
 		)
@@ -8677,6 +9019,15 @@
 		)
 		(property "Description" "Resistor, small symbol"
 			(at 168.91 62.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Device" ""
+			(at 168.91 62.23 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -8751,6 +9102,15 @@
 				(hide yes)
 			)
 		)
+		(property "Sim.Device" ""
+			(at 168.91 41.91 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "591bc9e4-12e3-4de1-a67f-4c33de1057f6")
 		)
@@ -8811,6 +9171,15 @@
 			)
 		)
 		(property "Description" "USB Power-Only 6P Type-C Receptacle connector"
+			(at 88.9 123.19 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Device" ""
 			(at 88.9 123.19 0)
 			(effects
 				(font
@@ -8903,6 +9272,15 @@
 				(hide yes)
 			)
 		)
+		(property "Sim.Device" ""
+			(at 194.31 125.73 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "7cf2c733-781a-4eb6-8b41-f94354f07fd5")
 		)
@@ -8961,6 +9339,15 @@
 			)
 		)
 		(property "Description" "Solder pad"
+			(at 194.31 135.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Device" ""
 			(at 194.31 135.89 0)
 			(effects
 				(font
@@ -9102,6 +9489,15 @@
 				(hide yes)
 			)
 		)
+		(property "Sim.Device" ""
+			(at 73.66 26.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "2a6144a9-3040-4a35-b4b9-a77b00cdd8c0")
 		)
@@ -9164,6 +9560,15 @@
 			)
 		)
 		(property "Description" "Resistor, small symbol"
+			(at 107.95 133.35 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Device" ""
 			(at 107.95 133.35 0)
 			(effects
 				(font
@@ -9235,6 +9640,15 @@
 		)
 		(property "Description" "Solder pad"
 			(at 59.69 34.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Device" ""
+			(at 59.69 34.29 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -9367,6 +9781,15 @@
 			)
 		)
 		(property "Description" "Resistor, small symbol"
+			(at 140.97 139.7 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Device" ""
 			(at 140.97 139.7 0)
 			(effects
 				(font
@@ -9567,6 +9990,15 @@
 		)
 		(property "Description" "Resistor, small symbol"
 			(at 168.91 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Sim.Device" ""
+			(at 168.91 59.69 90)
 			(effects
 				(font
 					(size 1.27 1.27)
