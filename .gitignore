@@ -176,7 +176,7 @@ cython_debug/
 # KiCAD
 \#auto_saved_files\#
 *.lck
-/PCB/Output-Test-Board/Output-Test-Board-backups
+/PCB/*/*-backups
 *.kicad_prl
 *.000
 *.bak
