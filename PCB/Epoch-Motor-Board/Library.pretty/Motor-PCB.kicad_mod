@@ -1,0 +1,88 @@
+(footprint "Motor-PCB"
+	(version 20241229)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(layer "F.Cu")
+	(property "Reference" "REF**"
+		(at 5 -3 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(uuid "ee238806-c513-46f8-bbf2-9f554a597bf1")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "Motor-PCB"
+		(at 5.8 1 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "7121c445-bd86-4b56-ae81-712c725f06a8")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "20e12e9d-b8c3-451d-930c-3c6756714546")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "fee2bbb0-0974-4c90-bb96-feb081235b40")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr smd)
+	(fp_text user "${REFERENCE}"
+		(at 5.8 2.2 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(uuid "77716811-5dba-487e-836f-d82a9e09a06d")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "1" thru_hole roundrect
+		(at 0 -3.6)
+		(size 3 1.7)
+		(drill oval 2 0.75)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(roundrect_rratio 0.5)
+		(uuid "9a1fd62f-5ca3-4fe1-a4b5-ac331dd63ab2")
+	)
+	(pad "2" thru_hole roundrect
+		(at 0 3.6)
+		(size 3 1.7)
+		(drill oval 2 0.75)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(roundrect_rratio 0.5)
+		(uuid "f86b28e3-3000-431d-bca6-b5546465ae08")
+	)
+	(embedded_fonts no)
+)
