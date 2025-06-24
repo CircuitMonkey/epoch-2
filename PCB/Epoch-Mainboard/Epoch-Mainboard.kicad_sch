@@ -5130,7 +5130,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "???"
+		(property "Value" "2K"
 			(at 118.11 133.604 90)
 			(effects
 				(font
@@ -6886,11 +6886,11 @@
 				(justify right)
 			)
 		)
-		(property "Value" "MCP73831-4-OT"
+		(property "Value" "MCP73831T-2ACI/OT"
 			(at 122.936 127 0)
 			(effects
 				(font
-					(size 1 1)
+					(size 0.8 0.8)
 					(thickness 0.2)
 					(bold yes)
 				)
@@ -9753,7 +9753,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "2K"
+		(property "Value" "1K"
 			(at 140.97 141.224 90)
 			(effects
 				(font
