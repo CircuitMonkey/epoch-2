@@ -25,15 +25,15 @@ class ManualPage(Page):
             self.append(e)
 
         self.indicator = Indicator( 402, 64, glyphs_img, glyphs_palette, 33, font )
-        self.pauseButton = ImageButton(0,416,4,41, glyphs_img, glyphs_palette)
-        self.returnButton = ImageButton(416,0,1,6, glyphs_img, glyphs_palette)
+        self.pauseButton = ImageButton(0,352, 2,2, 41, glyphs_img, glyphs_palette)
+        self.returnButton = ImageButton(416,0,1,1,6, glyphs_img, glyphs_palette)
         self.append(self.indicator.group)
         self.append(self.pauseButton)
         self.append(self.returnButton)
 
         # Left/Right Buttons
-        self.leftButton = TextButton(0,64,1,"<", glyphs_img, glyphs_palette,font)
-        self.rightButton = TextButton(320,64,1,">", glyphs_img, glyphs_palette,font)
+        self.leftButton = TextButton(0,64,1,1,"<", glyphs_img, glyphs_palette,font)
+        self.rightButton = TextButton(320,64,1,1,">", glyphs_img, glyphs_palette,font)
         self.append(self.leftButton)
         self.append(self.rightButton)
         self.updateLeftRight()
