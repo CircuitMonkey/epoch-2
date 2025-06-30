@@ -25,10 +25,10 @@ class CyclicModesPage(Page):
         self.dragChannel = 0
         self.state.pause = True
 
-        self.SOFT_ENV = [ 0, 0, 0, 40,70,99,99,70,40, 0, 0, 0 ]
+        self.SOFT_ENV = [ 0, 0, 10, 40,70,99,99,70,40, 10, 0, 0 ]
         self.HARD_ENV = [ 0, 0,0,99,99,0,0, 0 ] # Hammer Time!
         self.PPP_TICK = [-2,-2,0,0,3,3,7,7] # Push, Pull, Pendulum
-        self.CYC_TICK = [0,18,3,15,5,13,8,10] # negative envelope offset of 8 channels
+        self.CYC_TICK = [-8,8,-6,6,-4,4,-2,2] # negative envelope offset of 8 channels
 
         self.tick = 0
         self.tickDir = 1
