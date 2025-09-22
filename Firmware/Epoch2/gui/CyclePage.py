@@ -127,16 +127,22 @@ class CyclePage(Page):
 
         # todo: Move into loop above
         # Update slider motor indicator based on slider settings and tick.
+        # C-Ring x2
         self.sliders[0].set_channel_a_value(self.state.mode_cycle_motors[0])
         self.sliders[0].set_channel_b_value(self.state.mode_cycle_motors[1])
-        self.sliders[1].set_channel_a_value(self.state.mode_cycle_motors[2])
-        self.sliders[1].set_channel_b_value(self.state.mode_cycle_motors[3])
-        self.sliders[2].set_channel_a_value(self.state.mode_cycle_motors[4])
-        self.sliders[2].set_channel_b_value(self.state.mode_cycle_motors[5])
+        # TODO: Add second indicator for second C-Ring
+
+        # T-Ring
+        self.sliders[1].set_channel_a_value(self.state.mode_cycle_motors[4])
+        self.sliders[1].set_channel_b_value(self.state.mode_cycle_motors[5])
+
+        # Plug
+        self.sliders[2].set_channel_a_value(self.state.mode_cycle_motors[6])
+        self.sliders[2].set_channel_b_value(self.state.mode_cycle_motors[7])
 
         # Wand
-        self.sliders[3].set_channel_a_value(self.state.mode_cycle_motors[6])
-        self.sliders[3].set_channel_b_value(self.state.mode_cycle_motors[7])
+        self.sliders[3].set_channel_a_value(self.state.mode_cycle_motors[8])
+        self.sliders[3].set_channel_b_value(self.state.mode_cycle_motors[9])
 
         return
 
@@ -169,7 +175,7 @@ class CyclePage(Page):
             return 1 # nothing to drag
         tx = touch[0] - self.x
         ty = touch[1]
-        print(f"Handle ManualMode Touches => X: {tx}, Y: {ty}")
+        print(f"Handle CycleMode Touches => X: {tx}, Y: {ty}")
         # Return index of state.modes[mode] + 2 (because we use 0,1 here)
         if self.returnButton.isTouched(tx,ty):
                 self.state.pause = True
