@@ -27,7 +27,7 @@ class CyclicModesPage(Page):
 
         self.SOFT_ENV = [ 0, 0, 10, 40,70,99,99,70,40, 10, 0, 0 ]
         self.HARD_ENV = [ 0, 0,0,99,99,0,0, 0 ] # Hammer Time!
-        self.PPP_TICK = [-2,-2,0,0,3,3,7,7] # Push, Pull, Pendulum
+        self.PPP_TICK = [-3,-3,0,0,3,3,7,7] # Push, Pull, Pendulum
         self.CYC_TICK = [-8,8,-6,6,-4,4,-2,2] # negative envelope offset of 8 channels
 
         self.tick = 0
@@ -142,10 +142,20 @@ class CyclicModesPage(Page):
 
             self.currentMotors[ch] = motVal
 
+        # Update motors based on slider values:
+        # C-Rings (ch 0-3) use slider 0 value as reference
+        # T-Ring uses slider 1 as reference ( motor index 4,5 ) (1 + 1) * 2 = 4
+        # Plug uses slider 2 as reference (motor index 6,7 )    (2 + 1) * 2 = 6
+        # Wand uses slider 3 as reference (motor index 8,9 )    (3 + 1) * 2 = 8
         for sld in range(4):
-            mtr = sld*2
-            self.currentMotors[sld*2] = int(self.sliders[sld].value * self.currentMotors[sld*2] / 99)
-            self.currentMotors[sld*2+1] = int(self.sliders[sld].value * self.currentMotors[sld*2+1] / 99)
+            if sld == 0: # slider 0 affects both C-Rings.
+                for mtr in range(4):
+                    self.currentMotors[mtr] = int(self.sliders[sld].value * self.currentMotors[mtr] / 99)
+            else: # other sliders only affect one accessory
+                mtr = (sld+1)*2
+                self.currentMotors[mtr] = int(self.sliders[sld].value * self.currentMotors[mtr] / 99)
+                self.currentMotors[mtr+1] = int(self.sliders[sld].value * self.currentMotors[mtr+1] / 99)
+
 
         return
 
