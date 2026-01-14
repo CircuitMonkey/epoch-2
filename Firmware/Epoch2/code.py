@@ -167,6 +167,7 @@ while True:
                     pass
                 elif( tStat == 1): # touch is drag
                     print("Touch is drag")
+                    #page.updateMotors(motors)
                     pass
                 else: # touch is exit. tStat is code.
                     print(f"Mode returned exit page state. tstat={tStat}")
@@ -186,8 +187,8 @@ while True:
                 time.sleep(0.05)
 
 
-        if not drag:
-            page.updateGUI( sensorValue )
+        #if not drag:
+        page.updateGUI( sensorValue )
 
         #start_time = time.monotonic()
         display.refresh()
